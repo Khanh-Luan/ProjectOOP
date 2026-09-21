@@ -31,15 +31,28 @@ public abstract class MonAn
             this.dGiaMon = value;
         }
     }
+    public double GiaBan
+    {
+        get { return this.dGiaBan; }
+        set
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentOutOfRangeException($"{nameof(value)}, the price must be greater than 0.");
+            }
+            this.dGiaBan = value;
+        }
+    }
     // constructors
     public MonAn()
     {
     }
-    public MonAn(string maMon, string tenMon, double giaMon)
+    public MonAn(string maMon, string tenMon, double giaMon, double giaBan)
     {
         this.MaMon = maMon;
         this.TenMon = tenMon;
         this.GiaMon = giaMon;
+        this.GiaBan = giaBan;
     }
     //destructors
     ~MonAn() { }
