@@ -61,12 +61,17 @@ public abstract class MonAn
         this.TenMon = tenMon;
         this.GiaMon = giaMon;
     }
+    // Hàm xuất
     public virtual void Xuat()
     {
         Console.WriteLine($"Ma cua mon an: {this.sMaMon}");
         Console.WriteLine($"Ten cua mon an: {this.sTenMon}");
         Console.WriteLine($"Gia ban cua mon an: {this.dGiaMon}");
     }
-    public abstract void TinhGiaBan();
+    // Hàm tính toán
+    public virtual void TinhGiaBan()
+    {
+        this.dGiaBan = dGiaMon;
+    }
 }
 
