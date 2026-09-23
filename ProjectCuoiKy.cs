@@ -1,0 +1,581 @@
+using System;
+using System.Collections.Generic;
+
+// ================= NGUOI DUNG =================
+public abstract class NguoiDung
+{
+    protected string sMa;
+    protected string sTen;
+    protected string sSdt;
+    protected string sEmail;
+
+    public string Ma { get { return sMa; } set { sMa = value; } }
+    public string Ten { get { return sTen; } set { sTen = value; } }
+    public string Sdt { get { return sSdt; } set { sSdt = value; } }
+    public string Email { get { return sEmail; } set { sEmail = value; } }
+
+    public NguoiDung(string ma, string ten, string sdt, string email)
+    {
+        this.sMa = ma;
+        this.sTen = ten;
+        this.sSdt = sdt;
+        this.sEmail = email;
+    }
+
+    public virtual void Nhap()
+    {
+        Console.WriteLine("Nhap ma: ");
+        sMa = Console.ReadLine();
+        Console.WriteLine("Nhap ten: ");
+        sTen = Console.ReadLine();
+        Console.WriteLine("Nhap sdt: ");
+        sSdt = Console.ReadLine();
+        Console.WriteLine("Nhap email: ");
+        sEmail = Console.ReadLine();
+    }
+
+    public virtual void Xuat()
+    {
+        Console.WriteLine($"Ma: {sMa}");
+        Console.WriteLine($"Ten: {sTen}");
+        Console.WriteLine($"Sdt: {sSdt}");
+        Console.WriteLine($"Email: {sEmail}");
+    }
+
+    // moi loai nguoi dung tinh tien theo cach rieng cua minh
+    public abstract void TinhToanTien(double soTien);
+}
+
+public class KhachHang : NguoiDung
+{
+    private string sDiaChiGiao;
+    private int iDiemTichLuy;
+    private double dTongDaChi;
+    private List<Voucher> dsVoucher;
+
+    public string DiaChiGiao { get { return sDiaChiGiao; } set { sDiaChiGiao = value; } }
+    public int DiemTichLuy { get { return iDiemTichLuy; } set { iDiemTichLuy = value; } }
+    public double TongDaChi { get { return dTongDaChi; } }
+
+    public KhachHang(string ma, string ten, string sdt, string email, string diaChi)
+        : base(ma, ten, sdt, email)
+    {
+        this.sDiaChiGiao = diaChi;
+        this.iDiemTichLuy = 0;
+        this.dTongDaChi = 0;
+        this.dsVoucher = new List<Voucher>();
+    }
+
+    public void ThemVoucher(Voucher v)
+    {
+        dsVoucher.Add(v);
+    }
+
+    public void XoaVoucher(string ma)
+    {
+        Voucher v = TimVoucher(ma);
+        if (v != null)
+            dsVoucher.Remove(v);
+    }
+
+    public void HienThiVoucherDaDung()
+    {
+        Console.WriteLine("Voucher da su dung:");
+        for (int i = 0; i < dsVoucher.Count; i++)
+        {
+            if (dsVoucher[i].DaDung)
+                dsVoucher[i].Xuat();
+        }
+    }
+
+    public override void Nhap()
+    {
+        base.Nhap();
+        Console.WriteLine("Nhap dia chi giao: ");
+        sDiaChiGiao = Console.ReadLine();
+    }
+
+    public override void Xuat()
+    {
+        base.Xuat();
+        Console.WriteLine($"Dia chi giao: {sDiaChiGiao}");
+        Console.WriteLine($"Diem tich luy: {iDiemTichLuy}");
+    }
+
+    public Voucher TimVoucher(string ma)
+    {
+        for (int i = 0; i < dsVoucher.Count; i++)
+        {
+            if (dsVoucher[i].Ma == ma)
+                return dsVoucher[i];
+        }
+        return null;
+    }
+
+    // ham tinh toan so tien: cong don da chi va diem tich luy
+    public override void TinhToanTien(double soTien)
+    {
+        dTongDaChi = dTongDaChi + soTien;
+        iDiemTichLuy = iDiemTichLuy + (int)(soTien / 10000);
+    }
+}
+
+public class ChuQuan : NguoiDung
+{
+    private List<Quan> dsQuan;
+    private double dTongDoanhThu;
+
+    public double TongDoanhThu { get { return dTongDoanhThu; } }
+
+    public ChuQuan(string ma, string ten, string sdt, string email)
+        : base(ma, ten, sdt, email)
+    {
+        dsQuan = new List<Quan>();
+        dTongDoanhThu = 0;
+    }
+
+    public void ThemQuan(Quan quan)
+    {
+        dsQuan.Add(quan);
+    }
+
+    public override void Xuat()
+    {
+        base.Xuat();
+        Console.WriteLine($"So quan so huu: {dsQuan.Count}");
+    }
+
+    // ham tinh toan so tien: cong doanh thu tu don hang cua quan minh
+    public override void TinhToanTien(double soTien)
+    {
+        dTongDoanhThu = dTongDoanhThu + soTien;
+    }
+}
+
+public class TaiXe : NguoiDung
+{
+    private string sBienSo;
+    private bool bDangRanh;
+    private int iSoDonDaGiao;
+    private double dTongThuNhap;
+
+    public string BienSo { get { return sBienSo; } set { sBienSo = value; } }
+    public bool DangRanh { get { return bDangRanh; } set { bDangRanh = value; } }
+    public int SoDonDaGiao { get { return iSoDonDaGiao; } set { iSoDonDaGiao = value; } }
+    public double TongThuNhap { get { return dTongThuNhap; } }
+
+    public TaiXe(string ma, string ten, string sdt, string email, string bienSo)
+        : base(ma, ten, sdt, email)
+    {
+        this.sBienSo = bienSo;
+        this.bDangRanh = true;
+        this.iSoDonDaGiao = 0;
+        this.dTongThuNhap = 0;
+    }
+
+    // ham tinh toan so tien: tai xe nhan het phi ship cua don da giao
+    public override void TinhToanTien(double soTien)
+    {
+        dTongThuNhap = dTongThuNhap + soTien;
+    }
+
+    public override void Nhap()
+    {
+        base.Nhap();
+        Console.WriteLine("Nhap bien so xe: ");
+        sBienSo = Console.ReadLine();
+    }
+
+    public override void Xuat()
+    {
+        base.Xuat();
+        Console.WriteLine($"Bien so xe: {sBienSo}");
+        Console.WriteLine($"Dang ranh: {bDangRanh}");
+    }
+
+    public void HoanThanhGiao()
+    {
+        iSoDonDaGiao = iSoDonDaGiao + 1;
+        bDangRanh = true;
+    }
+}
+
+// ================= MON AN =================
+public class MonAn
+{
+    protected string sMa;
+    protected string sTen;
+    protected double dGia;
+
+    public string Ma { get { return sMa; } set { sMa = value; } }
+    public string Ten { get { return sTen; } set { sTen = value; } }
+    public double Gia
+    {
+        get { return dGia; }
+        set
+        {
+            if (value <= 0)
+                throw new ArgumentOutOfRangeException(nameof(value), "Gia phai > 0");
+            dGia = value;
+        }
+    }
+
+    public MonAn(string ma, string ten, double gia)
+    {
+        this.sMa = ma;
+        this.sTen = ten;
+        this.Gia = gia;
+    }
+
+    public virtual void HienThi()
+    {
+        Console.WriteLine($"{sMa} - {sTen} - {dGia}d");
+    }
+}
+
+// ================= VOUCHER =================
+public class Voucher
+{
+    private string sMa;
+    private double dPhanTram;
+    private bool bDaDung;
+
+    public string Ma { get { return sMa; } set { sMa = value; } }
+    public double PhanTram { get { return dPhanTram; } set { dPhanTram = value; } }
+    public bool DaDung { get { return bDaDung; } set { bDaDung = value; } }
+
+    public Voucher(string ma, double phanTram)
+    {
+        this.sMa = ma;
+        this.dPhanTram = phanTram;
+        this.bDaDung = false;
+    }
+
+    public double TinhGiam(double tienMon)
+    {
+        if (bDaDung)
+            return 0;
+        return tienMon * dPhanTram / 100;
+    }
+
+    public void Xuat()
+    {
+        Console.WriteLine($"{sMa} - Giam {dPhanTram}% - Da dung: {bDaDung}");
+    }
+}
+
+// ================= QUAN =================
+public class Quan
+{
+    private string sMa;
+    private string sTen;
+    private string sDiaChi;
+    private bool bDangMoCua;
+    private List<MonAn> menu;
+    private ChuQuan chuQuan;
+
+    public string Ma { get { return sMa; } set { sMa = value; } }
+    public string Ten { get { return sTen; } set { sTen = value; } }
+    public string DiaChi { get { return sDiaChi; } set { sDiaChi = value; } }
+    public bool DangMoCua { get { return bDangMoCua; } set { bDangMoCua = value; } }
+    public ChuQuan ChuCuaQuan { get { return chuQuan; } set { chuQuan = value; } }
+
+    public Quan(string ma, string ten, string diaChi, ChuQuan chuQuan)
+    {
+        this.sMa = ma;
+        this.sTen = ten;
+        this.sDiaChi = diaChi;
+        this.bDangMoCua = true;
+        this.menu = new List<MonAn>();
+        this.chuQuan = chuQuan;
+    }
+
+    public void ThemMon(MonAn mon)
+    {
+        menu.Add(mon);
+    }
+
+    public MonAn TimMon(string ma)
+    {
+        for (int i = 0; i < menu.Count; i++)
+        {
+            if (menu[i].Ma == ma)
+                return menu[i];
+        }
+        return null;
+    }
+
+    public void HienThiMenu()
+    {
+        for (int i = 0; i < menu.Count; i++)
+        {
+            menu[i].HienThi();
+        }
+    }
+}
+
+// ================= PHUONG THUC THANH TOAN =================
+public abstract class PhuongThucThanhToan
+{
+    public abstract bool XuLyThanhToan(double soTien);
+}
+
+public class TienMat : PhuongThucThanhToan
+{
+    public override bool XuLyThanhToan(double soTien)
+    {
+        Console.WriteLine($"Thanh toan {soTien}d bang tien mat khi nhan hang.");
+        return true;
+    }
+}
+
+public class ViDienTu : PhuongThucThanhToan
+{
+    private double dSoDu;
+
+    public ViDienTu(double soDu)
+    {
+        this.dSoDu = soDu;
+    }
+
+    public override bool XuLyThanhToan(double soTien)
+    {
+        if (dSoDu < soTien)
+        {
+            Console.WriteLine("So du vi dien tu khong du.");
+            return false;
+        }
+        dSoDu = dSoDu - soTien;
+        Console.WriteLine($"Da thanh toan {soTien}d bang vi dien tu. Con lai: {dSoDu}d");
+        return true;
+    }
+}
+
+public class The : PhuongThucThanhToan
+{
+    private string sSoTheCuoi;
+    private double dPhiGiaoDich;
+
+    public The(string soTheCuoi, double phiGiaoDich)
+    {
+        this.sSoTheCuoi = soTheCuoi;
+        this.dPhiGiaoDich = phiGiaoDich;
+    }
+
+    public override bool XuLyThanhToan(double soTien)
+    {
+        double tongTien = soTien + dPhiGiaoDich;
+        Console.WriteLine($"Da thanh toan {tongTien}d bang the ***{sSoTheCuoi} (gom phi {dPhiGiaoDich}d)");
+        return true;
+    }
+}
+
+// ================= DON HANG =================
+public class DonHang
+{
+    private string sMa;
+    private KhachHang khach;
+    private Quan quan;
+    private TaiXe taiXe;
+    private List<MonAn> dsMon;
+    private List<int> dsSoLuong;
+    private double dKhoangCachKm;
+    private string sTrangThai; // ChoXacNhan, DangGiao, HoanThanh, DaHuy
+    private PhuongThucThanhToan thanhToan;
+    private double dSoTienDaThanhToan;
+
+    public string TrangThai { get { return sTrangThai; } }
+
+    public DonHang(string ma, KhachHang khach, Quan quan, double khoangCachKm)
+    {
+        this.sMa = ma;
+        this.khach = khach;
+        this.quan = quan;
+        this.dKhoangCachKm = khoangCachKm;
+        this.dsMon = new List<MonAn>();
+        this.dsSoLuong = new List<int>();
+        this.sTrangThai = "ChoXacNhan";
+    }
+
+    public void GoiMon(MonAn mon, int soLuong)
+    {
+        dsMon.Add(mon);
+        dsSoLuong.Add(soLuong);
+    }
+
+    public double TongTienMon()
+    {
+        double tong = 0;
+        for (int i = 0; i < dsMon.Count; i++)
+        {
+            tong = tong + dsMon[i].Gia * dsSoLuong[i];
+        }
+        return tong;
+    }
+
+    public double TinhPhiShip()
+    {
+        if (dKhoangCachKm <= 3)
+            return 15000;
+        if (dKhoangCachKm <= 7)
+            return 25000;
+        return 40000;
+    }
+
+    public double TinhGiamGia(string maVoucher)
+    {
+        if (maVoucher == null)
+            return 0;
+        Voucher v = khach.TimVoucher(maVoucher);
+        if (v == null)
+            return 0;
+        return v.TinhGiam(TongTienMon());
+    }
+
+    public double TongThanhToan(string maVoucher)
+    {
+        return TongTienMon() - TinhGiamGia(maVoucher) + TinhPhiShip();
+    }
+
+    public void GanTaiXe(TaiXe tx)
+    {
+        this.taiXe = tx;
+        tx.DangRanh = false;
+        this.sTrangThai = "DangGiao";
+    }
+
+    public void ThanhToan(PhuongThucThanhToan ptTT, string maVoucher)
+    {
+        this.thanhToan = ptTT;
+        double giam = TinhGiamGia(maVoucher);
+        double tongTien = TongThanhToan(maVoucher);
+        this.dSoTienDaThanhToan = tongTien;
+        bool thanhCong = thanhToan.XuLyThanhToan(tongTien);
+        if (thanhCong)
+        {
+            this.sTrangThai = "HoanThanh";
+            if (maVoucher != null)
+            {
+                Voucher v = khach.TimVoucher(maVoucher);
+                if (v != null)
+                    v.DaDung = true;
+            }
+            khach.TinhToanTien(tongTien);
+            quan.ChuCuaQuan.TinhToanTien(TongTienMon() - giam);
+            if (taiXe != null)
+            {
+                taiXe.TinhToanTien(TinhPhiShip());
+                taiXe.HoanThanhGiao();
+            }
+        }
+    }
+
+    public void InHoaDon()
+    {
+        Console.WriteLine($"----- HOA DON {sMa} -----");
+        for (int i = 0; i < dsMon.Count; i++)
+        {
+            Console.WriteLine($"{dsMon[i].Ten} x{dsSoLuong[i]} = {dsMon[i].Gia * dsSoLuong[i]}d");
+        }
+        Console.WriteLine($"Tien mon: {TongTienMon()}d");
+        Console.WriteLine($"Phi ship: {TinhPhiShip()}d");
+        Console.WriteLine($"Tong thanh toan: {dSoTienDaThanhToan}d");
+        Console.WriteLine($"Trang thai: {sTrangThai}");
+    }
+}
+
+// ================= UNG DUNG (LOP TONG) =================
+public class UngDung
+{
+    private List<KhachHang> dsKhachHang;
+    private List<ChuQuan> dsChuQuan;
+    private List<TaiXe> dsTaiXe;
+    private List<Quan> dsQuan;
+    private List<DonHang> dsDonHang;
+
+    public UngDung()
+    {
+        dsKhachHang = new List<KhachHang>();
+        dsChuQuan = new List<ChuQuan>();
+        dsTaiXe = new List<TaiXe>();
+        dsQuan = new List<Quan>();
+        dsDonHang = new List<DonHang>();
+    }
+
+    public void ThemKhachHang(KhachHang kh) { dsKhachHang.Add(kh); }
+    public void ThemChuQuan(ChuQuan cq) { dsChuQuan.Add(cq); }
+    public void ThemTaiXe(TaiXe tx) { dsTaiXe.Add(tx); }
+    public void ThemQuan(Quan q) { dsQuan.Add(q); }
+
+    public TaiXe TimTaiXeRanh()
+    {
+        for (int i = 0; i < dsTaiXe.Count; i++)
+        {
+            if (dsTaiXe[i].DangRanh)
+                return dsTaiXe[i];
+        }
+        return null;
+    }
+
+    public DonHang TaoDonHang(string ma, KhachHang kh, Quan quan, double khoangCach)
+    {
+        DonHang don = new DonHang(ma, kh, quan, khoangCach);
+        dsDonHang.Add(don);
+        return don;
+    }
+
+    public void BaoCao()
+    {
+        Console.WriteLine("===== BAO CAO =====");
+        Console.WriteLine($"So don hang: {dsDonHang.Count}");
+        for (int i = 0; i < dsTaiXe.Count; i++)
+        {
+            dsTaiXe[i].Xuat();
+        }
+    }
+}
+
+// ================= CHAY THU =================
+class Program
+{
+    static void Main(string[] args)
+    {
+        UngDung app = new UngDung();
+
+        ChuQuan cq = new ChuQuan("CQ01", "Anh Ba", "0900000000", "ba@gmail.com");
+        app.ThemChuQuan(cq);
+
+        Quan quan = new Quan("Q01", "Com Tam Ba Ba", "123 Le Loi", cq);
+        quan.ThemMon(new MonAn("M01", "Com suon", 35000));
+        quan.ThemMon(new MonAn("M02", "Canh chua", 20000));
+        cq.ThemQuan(quan);
+        app.ThemQuan(quan);
+
+        KhachHang kh = new KhachHang("KH01", "Nguyen An", "0911111111", "an@gmail.com", "45 Nguyen Trai");
+        kh.ThemVoucher(new Voucher("VC10", 10));
+        app.ThemKhachHang(kh);
+
+        TaiXe tx = new TaiXe("TX01", "Van Hung", "0922222222", "hung@gmail.com", "59A1-12345");
+        app.ThemTaiXe(tx);
+
+        quan.HienThiMenu();
+
+        DonHang don = app.TaoDonHang("DH001", kh, quan, 4.5);
+        don.GoiMon(quan.TimMon("M01"), 2);
+        don.GoiMon(quan.TimMon("M02"), 1);
+
+        TaiXe taiXeRanh = app.TimTaiXeRanh();
+        if (taiXeRanh != null)
+            don.GanTaiXe(taiXeRanh);
+
+        don.ThanhToan(new ViDienTu(200000), "VC10");
+        don.InHoaDon();
+
+        app.BaoCao();
+        cq.Xuat();
+        kh.Xuat();
+        kh.HienThiVoucherDaDung();
+
+        Console.ReadLine();
+    }
+}
