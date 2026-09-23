@@ -9,7 +9,7 @@ namespace ProjectOOP
         // fields
         private string sMa;
         private double dPhanTram;
-        private bool bConSuDung;
+        private bool bConSuDungDuoc;
         // properties
 
         public string Ma { 
@@ -20,10 +20,10 @@ namespace ProjectOOP
             get { return this.dPhanTram; } 
             set { this.dPhanTram = value; } 
         }
-        public bool ConSuDung
+        public bool ConSuDungDuoc
         {
-            get { return this.bConSuDung; }
-            set { this.bConSuDung = value; }
+            get { return this.bConSuDungDuoc; }
+            set { this.bConSuDungDuoc = value; }
         }
         // Constructors
         public Voucher() {}
@@ -31,7 +31,7 @@ namespace ProjectOOP
         {
             this.Ma = ma;
             this.PhanTram = phanTram;
-            this.ConSuDung = false;
+            this.bConSuDungDuoc = suDung;
         }
         //method
         public void Nhap()
@@ -40,13 +40,17 @@ namespace ProjectOOP
             this.sMa = Console.ReadLine();
             Console.WriteLine("Nhap pham tram: ");
             this.dPhanTram = Convert.ToDouble(Console.ReadLine());
-            bConSuDung = false;
+            bConSuDungDuoc = true;
         }
         public double TinhGiam(double tienMon)
         {
-            if (bConSuDung)
+            if (!bConSuDungDuoc)
                 return 0;
             return tienMon * dPhanTram / 100;
+        }
+        public void Xuat()
+        {
+            Console.WriteLine($"Ma voucher: {sMa} - Giam {dPhanTram}% - Con su dung duoc {bConSuDungDuoc}");
         }
     }
 }
