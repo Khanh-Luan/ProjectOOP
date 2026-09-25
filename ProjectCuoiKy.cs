@@ -95,6 +95,16 @@ public class KhachHang : NguoiDung
         }
     }
 
+    public void HienThiVoucherConDung()
+    {
+        Console.WriteLine("Voucher hien co:");
+        for (int i = 0; i < dsVoucher.Count; i++)
+        {
+            if (dsVoucher[i].ConSuDung)
+                dsVoucher[i].Xuat();
+        }
+    }
+
     public override void Nhap()
     {
         base.Nhap();
@@ -427,23 +437,27 @@ public class ViDienTu : PhuongThucThanhToan
 
 public class The : PhuongThucThanhToan
 {
+    private const double PHI_GIAO_DICH_MAC_DINH = 3000; // he thong tu dat theo thuc te
+
     private string sSoTheCuoi;
     private double dPhiGiaoDich;
 
-    public The() { }
+    public The()
+    {
+        dPhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
+    }
 
-    public The(string soTheCuoi, double phiGiaoDich)
+    public The(string soTheCuoi)
     {
         this.sSoTheCuoi = soTheCuoi;
-        this.dPhiGiaoDich = phiGiaoDich;
+        this.dPhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
     }
 
     public void Nhap()
     {
         Console.WriteLine("Nhap 4 so cuoi the: ");
         sSoTheCuoi = Console.ReadLine();
-        Console.WriteLine("Nhap phi giao dich: ");
-        dPhiGiaoDich = Convert.ToDouble(Console.ReadLine());
+        dPhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
     }
 
     public override bool XuLyThanhToan(double soTien)
@@ -739,6 +753,7 @@ class Program
             ptTT = new TienMat();
         }
 
+        kh.HienThiVoucherConDung();
         Console.WriteLine("Nhap ma voucher muon dung (bo trong neu khong dung): ");
         string maVoucher = Console.ReadLine();
         if (string.IsNullOrEmpty(maVoucher))
