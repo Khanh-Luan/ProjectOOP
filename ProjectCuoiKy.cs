@@ -51,12 +51,12 @@ public abstract class NguoiDung
 public class KhachHang : NguoiDung
 {
     private string sDiaChiGiao;
-    private int iDiemTichLuy;
+    private int iDiemTichLuyITFood;
     private double dTongDaChi;
     private List<Voucher> dsVoucher;
 
     public string DiaChiGiao { get { return sDiaChiGiao; } set { sDiaChiGiao = value; } }
-    public int DiemTichLuy { get { return iDiemTichLuy; } set { iDiemTichLuy = value; } }
+    public int DiemTichLuyITFood { get { return iDiemTichLuyITFood; } set { iDiemTichLuyITFood = value; } }
     public double TongDaChi { get { return dTongDaChi; } }
 
     public KhachHang()
@@ -68,7 +68,7 @@ public class KhachHang : NguoiDung
         : base(ma, ten, sdt, email)
     {
         this.sDiaChiGiao = diaChi;
-        this.iDiemTichLuy = 0;
+        this.iDiemTichLuyITFood = 0;
         this.dTongDaChi = 0;
         this.dsVoucher = new List<Voucher>();
     }
@@ -116,7 +116,7 @@ public class KhachHang : NguoiDung
     {
         base.Xuat();
         Console.WriteLine($"Dia chi giao: {sDiaChiGiao}");
-        Console.WriteLine($"Diem tich luy: {iDiemTichLuy}");
+        Console.WriteLine($"Diem tich luy: {iDiemTichLuyITFood}");
     }
 
     public Voucher TimVoucher(string ma)
@@ -133,7 +133,7 @@ public class KhachHang : NguoiDung
     public override void TinhToanTien(double soTien)
     {
         dTongDaChi = dTongDaChi + soTien;
-        iDiemTichLuy = iDiemTichLuy + (int)(soTien / 10000);
+        iDiemTichLuyITFood = iDiemTichLuyITFood + (int)(soTien / 10000);
     }
 }
 
