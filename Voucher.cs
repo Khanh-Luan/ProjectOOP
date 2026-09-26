@@ -4,53 +4,38 @@ using System.Text;
 
 namespace ProjectOOP
 {
-    internal class Voucher
+    public class Voucher
     {
-        // fields
         private string sMa;
+        private string sTen;
         private double dPhanTram;
-        private bool bConSuDungDuoc;
-        // properties
+        private bool bConSuDung;
 
-        public string Ma { 
-            get { return this.sMa; } 
-            set { this.sMa = value; } 
-        }
-        public double PhanTram { 
-            get { return this.dPhanTram; } 
-            set { this.dPhanTram = value; } 
-        }
-        public bool ConSuDungDuoc
+        public string Ma { get { return sMa; } set { sMa = value; } }
+        public string Ten { get { return sTen; } set { sTen = value; } }
+        public double PhanTram { get { return dPhanTram; } set { dPhanTram = value; } }
+        public bool ConSuDung { get { return bConSuDung; } }
+
+        public Voucher() { }
+
+        public Voucher(string ma, string ten, double phanTram)
         {
-            get { return this.bConSuDungDuoc; }
-            set { this.bConSuDungDuoc = value; }
         }
-        // Constructors
-        public Voucher() {}
-        public Voucher(string ma, double phanTram, bool suDung)
-        {
-            this.Ma = ma;
-            this.PhanTram = phanTram;
-            this.bConSuDungDuoc = suDung;
-        }
-        //method
-        public void Nhap()
-        {
-            Console.WriteLine("Nhap ma voucher: ");
-            this.sMa = Console.ReadLine();
-            Console.WriteLine("Nhap pham tram: ");
-            this.dPhanTram = Convert.ToDouble(Console.ReadLine());
-            bConSuDungDuoc = true;
-        }
+
         public double TinhGiam(double tienMon)
         {
-            if (!bConSuDungDuoc)
-                return 0;
-            return tienMon * dPhanTram / 100;
         }
+
+        public void SuDung()
+        {
+        }
+
+        public void Nhap()
+        {
+        }
+
         public void Xuat()
         {
-            Console.WriteLine($"Ma voucher: {sMa} - Giam {dPhanTram}% - Con su dung duoc {bConSuDungDuoc}");
         }
     }
 }

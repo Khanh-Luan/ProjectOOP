@@ -63,4 +63,5 @@
         Console.WriteLine($"So dien thoai: {this.SDT}");
         Console.WriteLine($"Email: {this.Email}");
     }
+    public abstract void TinhToanTien(double soTien);
 }
