@@ -48,9 +48,7 @@ namespace ITFood
 
         public void HienThi()
         {
-            Console.WriteLine("Ma cua mon an: " + this.sMa);
-            Console.WriteLine("Ten cua mon an: " + this.sTen);
-            Console.WriteLine("Gia cua mon an: " + this.dGia);
+            Console.WriteLine($"Mon an {this.sMa} - {this.sTen} | Gia tien: {this.dGia}");
         }
     }
 }

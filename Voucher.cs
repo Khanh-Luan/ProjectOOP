@@ -21,8 +21,8 @@ namespace ProjectOOP
         }
         public double PhanTram { 
             get { return this.dPhanTram; }
-            set { if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(value), "Phan tram giam phai lon hon 0%.");
+            set { if (value <= 0 || value >100)
+                    throw new ArgumentOutOfRangeException(nameof(value), "Phan tram giam phai lon hon 0% va khong vuot qua 100%.");
                   this.dPhanTram = value; }
         }
         public bool ConSuDung { 
@@ -41,8 +41,8 @@ namespace ProjectOOP
 
         public double TinhGiam(double tienMon)
         {
-            if (bConSuDung) 
-                return tienMon * PhanTram / 100;
+            if (this.bConSuDung) 
+                return tienMon * this.dPhanTram / 100;
             return 0;
         }
 
@@ -57,14 +57,14 @@ namespace ProjectOOP
             this.Ma = Console.ReadLine();
             Console.Write("Nhap ten cua voucher: ");
             this.Ten = Console.ReadLine();
-            Console.Write("Nhap phan tram cua voucher: ");
+            Console.Write("Nhap phan tram cua voucher (1 - 100): ");
             this.PhanTram = Convert.ToDouble(Console.ReadLine());
             this.bConSuDung = true;
         }
 
         public void HienThi()
         {
-            Console.WriteLine($"Voucher {this.sMa} - {this.sTen} - Giam {this.dPhanTram}% - Con su dung: {this.bConSuDung}");
+            Console.WriteLine($"Voucher {this.sMa} - {this.sTen} | Giam {this.dPhanTram}% | Con su dung: {this.bConSuDung}");
         }
     }
 }
