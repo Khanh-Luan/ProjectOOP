@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-namespace ITFood
-{
-    public class ViDienTu : PhuongThucThanhToan
-    {
-        private double dSoDu;
+//namespace ITFood
+//{
+//    public class ViDienTu : PhuongThucThanhToan
+//    {
+//        private double dSoDu;
 
-        public ViDienTu() { }
+//        public ViDienTu() { }
 
-        public ViDienTu(double soDu)
-        {
-        }
+//        public ViDienTu(double soDu)
+//        {
+//        }
 
-        public void Nhap()
-        {
-        }
+//        public void Nhap()
+//        {
+//        }
 
-        public override bool XuLyThanhToan(double soTien)
-        {
-        }
-    }
-}
+//        public override bool XuLyThanhToan(double soTien)
+//        {
+//        }
+//    }
+//}

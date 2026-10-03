@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-namespace ITFood
-{
-    public abstract class PhuongThucThanhToan
-    {
-        public abstract bool XuLyThanhToan(double soTien);
-    }  
-}
+//namespace ITFood
+//{
+//    public abstract class PhuongThucThanhToan
+//    {
+//        public abstract bool XuLyThanhToan(double soTien);
+//    }  
+//}

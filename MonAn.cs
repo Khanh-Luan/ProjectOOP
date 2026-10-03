@@ -10,14 +10,20 @@ namespace ITFood
         protected string sTen;
         protected double dGia;
 
-        public string Ma { get { return sMa; } set { sMa = value; } }
-        public string Ten { get { return sTen; } set { sTen = value; } }
+        public string Ma { 
+            get { return this.sMa; } 
+            set { this.sMa = value; } 
+        }
+        public string Ten { 
+            get { return this.sTen; } 
+            set { this.sTen = value; }
+        }
         public double Gia
         {
-            get { return dGia; }
-            set
-            {
-                dGia = value;
+            get { return this.dGia; }
+            set { if (value <= 0)
+                    throw new ArgumentOutOfRangeException(nameof(value), "Gia cua mon an phai > 0.");
+                this.dGia = value;
             }
         }
 
@@ -25,14 +31,26 @@ namespace ITFood
 
         public MonAn(string ma, string ten, double gia)
         {
+            this.Ma = ma;
+            this.Ten = ten;
+            this.Gia = gia;
         }
 
-        public virtual void Nhap()
+        public void Nhap()
         {
+            Console.Write("Nhap ma mon an: ");
+            this.Ma = Console.ReadLine();
+            Console.Write("Nhap ten mon an: ");
+            this.Ten = Console.ReadLine();
+            Console.Write("Nhap gia mon an: ");
+            this.Gia = Convert.ToDouble(Console.ReadLine());
         }
 
-        public virtual void HienThi()
+        public void HienThi()
         {
+            Console.WriteLine("Ma cua mon an: " + this.sMa);
+            Console.WriteLine("Ten cua mon an: " + this.sTen);
+            Console.WriteLine("Gia cua mon an: " + this.dGia);
         }
     }
 }
