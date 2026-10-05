@@ -6,8 +6,9 @@ class Program
 {
     public static void Main(string[] args)
     {
-        Voucher v = new Voucher();
-        v.Nhap();
-        v.HienThi();
+        NguoiDung a = new KhachHang();
+        NguoiDung b = new TaiXe();
+        a.Nhap();
+        b.Nhap();
     }
 }
