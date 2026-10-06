@@ -56,10 +56,10 @@ namespace ITFood
             this.BienSo = Console.ReadLine();
         }
 
-        public override void HienThi()
+        public override void Xuat()
         {
             Console.WriteLine("---Thong tin tai xe---");
-            base.HienThi();
+            base.Xuat();
             Console.WriteLine($"Bien so xe {this.sBienSo}");
             Console.WriteLine($"Dang ranh: {this.bDangRanh}");
             Console.WriteLine($"So don da giao: {this.iSoDonDaGiao}");

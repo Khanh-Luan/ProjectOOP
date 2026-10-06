@@ -55,6 +55,7 @@ namespace ITFood
 
         public void Nhap()
         {
+            Console.WriteLine("--- Thong tin cua quan ---");
             Console.WriteLine("Nhap ma quan: ");
             this.Ma = Console.ReadLine();
             Console.WriteLine("Nhap ten quan: ");
@@ -69,7 +70,7 @@ namespace ITFood
             menu.Add(mon);
         }
 
-        public MonAn TimMon(string ma)
+        public MonAn TimMon(string ma) // string thì trả về chuỗi chữ, Class trả về một object
         {
             foreach (MonAn mon in menu)
             {
@@ -80,34 +81,74 @@ namespace ITFood
 
         public void HienThiMenu()
         {
+            Console.WriteLine($"--- Menu cua quan {this.sTen} ---");
+            foreach (MonAn mon in menu)
+            {
+                Console.WriteLine($" {mon.Ma} - {mon.Ten} - {mon.Gia} ");
+            }
         }
-
+        // Quản lí voucher của quán
         public void ThemVoucher(Voucher v)
         {
+            dsVoucher.Add(v);
         }
 
         public Voucher TimVoucher(string ma)
         {
+            foreach (Voucher v in dsVoucher)
+            {
+                if (v.Ma == ma) return v;
+            }
+            return null;
         }
 
         public bool CoVoucher()
         {
+            foreach (Voucher v in dsVoucher)
+            {
+                if (v.ConSuDung) return true;
+            }
+            return false;
         }
 
         public void HienThiVoucherConDung()
         {
+            Console.WriteLine($"Voucher hien co cua quan {this.sTen}: ");
+            foreach (Voucher v in dsVoucher)
+            {
+                if (v.ConSuDung) v.Xuat();
+            }
         }
 
         public void HienThiVoucherDaDung()
         {
+            Console.WriteLine($"Voucher da dung cua quan {this.sTen}: ");
+            foreach (Voucher v in dsVoucher)
+            {
+                if (!v.ConSuDung) v.Xuat();
+            }
         }
 
         public void Xuat()
         {
+            Console.WriteLine($"===== THONG TIN QUAN =====");
+            Console.WriteLine($"Ma quan: {this.sMa}");
+            Console.WriteLine($"Ten quan: {this.sTen}");
+            Console.WriteLine($"Dia chi: {this.sDiaChi}");
+            Console.WriteLine($"Dang mo cua: {this.bDangMoCua}");
+            Console.WriteLine($"So mon trong menu: {menu.Count}");
+            Console.WriteLine($"So voucher: {dsVoucher.Count}");
+            if (chuQuan != null)
+            {
+                Console.WriteLine($"Chu quan: {chuQuan.Ten} (Ma: {chuQuan.Ma})");
+                Console.WriteLine($"Doanh thu cua chu: {chuQuan.TongDoanhThu}d");
+            }
         }
 
-        public void NhanDon(DonHang don)
-        {
-        }
+        //public void NhanDon(DonHang don)
+        //{
+        //    Console.WriteLine($"[Thong bao quan {this.sTen}] Nhan duoc don {don.Ma}, bat dau lam mon!!!");
+        //    don.CapNhatTrangThai(TrangThaiDon.DangLam);
+        //}
     }
 }

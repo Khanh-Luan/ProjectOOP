@@ -62,7 +62,7 @@ namespace ProjectOOP
             this.bConSuDung = true;
         }
 
-        public void HienThi()
+        public void Xuat()
         {
             Console.WriteLine($"Voucher {this.sMa} - {this.sTen} | Giam {this.dPhanTram}% | Con su dung: {this.bConSuDung}");
         }

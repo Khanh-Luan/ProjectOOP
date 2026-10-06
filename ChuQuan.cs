@@ -50,9 +50,10 @@ namespace ITFood
             }
         }
 
-        public override void HienThi()
+        public override void Xuat()
         {
-            base.HienThi();
+            Console.WriteLine("---Thong tin chu quan---");
+            base.Xuat();
             Console.WriteLine($"So quan chu so huu: {dsQuan.Count}");
             Console.WriteLine($"Tong doanh thu: {this.dTongDoanhThu}đ");
         }
