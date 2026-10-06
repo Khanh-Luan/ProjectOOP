@@ -41,11 +41,11 @@ namespace ProjectOOP
             this.DiaChiGiao = Console.ReadLine();
         }
 
-        public override void Xuat()
+        public override void HienThi()
         {
 
             Console.WriteLine("---Thong tin khach hang---");
-            base.Xuat();
+            base.HienThi();
             Console.WriteLine($"Dia chi giao: {this.sDiaChiGiao}");
             Console.WriteLine($"Diem tich luy ITFood: {this.iDiemTichLuyITFood}");
             Console.WriteLine($"Tong da chi: {this.dTongDaChi}đ");

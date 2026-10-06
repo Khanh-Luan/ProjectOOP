@@ -56,7 +56,7 @@
         this.SDT = sdt;
         this.Email = email;
     }
-    public virtual void Xuat()
+    public virtual void HienThi()
     {
         Console.WriteLine($"Ma: {this.Ma}");
         Console.WriteLine($"Ten: {this.Ten}");
