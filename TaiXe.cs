@@ -20,11 +20,11 @@ namespace ITFood
             set { this.bDangRanh = value; } 
         }
         public int SoDonDaGiao { 
-            get { return iSoDonDaGiao; } 
-            set { iSoDonDaGiao = value; } 
+            get { return this.iSoDonDaGiao; } 
+            set { this.iSoDonDaGiao = value; } 
         }
         public double TongThuNhap { 
-            get { return dTongThuNhap; } 
+            get { return this.dTongThuNhap; } 
             set { this.dTongThuNhap = value; }
         }
 
