@@ -8,43 +8,66 @@ namespace ITFood
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8; // Để hiển thị tiếng Việt
-            Console.WriteLine("======= TEST 1: TẠO MÓN ĂN & VOUCHER =======");
-            MonAn mon1 = new MonAn("M01", "Phở Bò Kobe", 50000);
-            MonAn mon2 = new MonAn("M02", "Cơm Tấm Sườn Bì", 40000);
-            Voucher v1 = new Voucher("KM20", "Giảm 20% sinh viên", 20);
-            Console.WriteLine("\n======= TEST 2: CHỦ QUÁN & QUÁN (QUAN HỆ 2 CHIỀU) =======");
-            ChuQuan ongChu = new ChuQuan("CQ01", "Chú Hùng", "0988123456", "hung@gmail.com");
-            Quan quanPho = new Quan("Q01", "Phở Gia Truyền", "123 Lê Lợi");
+            // ================= 1. TẠO SẴN DỮ LIỆU GIẢ LẬP =================
+            // Tạo Khách
+            KhachHang kh = new KhachHang("KH01", "Nguyen Van A", "0901234567", "a@gmail.com", "123 Le Loi");
 
-            // Gắn kết quán cho chủ (Test quan hệ 2 chiều)
-            ongChu.ThemQuan(quanPho);
+            // Tạo Chủ quán & Quán
+            ChuQuan cq = new ChuQuan("CQ01", "Tran B", "0987654321", "b@gmail.com");
+            Quan quan = new Quan("Q01", "Pho Pasteur", "456 Pasteur");
+            cq.ThemQuan(quan); // Liên kết quán này thuộc về chủ CQ01
 
-            // Thêm món và voucher vào quán
-            quanPho.ThemMon(mon1);
-            quanPho.ThemMon(mon2);
-            quanPho.ThemVoucher(v1);
-            // Xuất thông tin quán (Sẽ thấy có cả thông tin ông chủ ở dưới cùng)
-            quanPho.Xuat();
-            Console.WriteLine();
-            quanPho.HienThiMenu();
-            Console.WriteLine("\n======= TEST 3: KHÁCH HÀNG & TÀI XẾ CHI TIỀN =======");
-            KhachHang kh = new KhachHang("KH01", "Nguyễn Văn Khách", "0123456", "kh@gmail.com", "456 Nguyễn Trãi");
-            TaiXe tx = new TaiXe("TX01", "Trần Văn Xe", "0789789", "tx@gmail.com", "59A-123.45");
-            // Khách hàng mua đơn 100k
-            kh.TinhToanTien(100000);
-            // Tài xế nhận phí ship 15k, và hoàn thành chuyến xe
-            tx.TinhToanTien(15000);
-            tx.HoanThanhGiao();
-            // Chủ quán nhận doanh thu 100k
-            ongChu.TinhToanTien(100000);
-            // In ra xem kết quả cập nhật tiền bạc
-            kh.Xuat();
-            Console.WriteLine();
-            tx.Xuat();
-            Console.WriteLine();
-            ongChu.Xuat(); // Xem ông chủ đã nhận được tiền chưa
-            Console.ReadLine(); // Dừng màn hình để xem
+            // Thêm món vào Menu
+            quan.ThemMon(new MonAn("M01", "Pho Bo Tai", 50000));
+            quan.ThemMon(new MonAn("M02", "Tra Da", 5000));
+
+            // Thêm Voucher giảm 20%
+            Voucher v = new Voucher("GIAM20", "Giam 20 phan tram", 20);
+            quan.ThemVoucher(v);
+
+            // Tạo Tài xế
+            TaiXe tx = new TaiXe("TX01", "Le Van C", "0911111111", "c@gmail.com", "59X1-12345");
+
+
+            // ================= 2. BẮT ĐẦU LUỒNG ĐẶT HÀNG =================
+            Console.WriteLine("====== KHACH HANG DAT DON ======");
+            DonHang don = new DonHang("DH001", kh, quan);
+
+            // Gọi hàm Nhap() để hiện Menu và cho khách nhập món, nhập km
+            don.Nhap();
+
+
+            // ================= 3. QUÁN NHẬN VÀ LÀM MÓN =================
+            Console.WriteLine("\n====== QUAN XAC NHAN ======");
+            quan.NhanDon(don);
+
+
+            // ================= 4. THANH TOAN =================
+            Console.WriteLine("\n====== THANH TOAN ======");
+            // Giả lập khách hàng xài Ví điện tử, nạp sẵn 200.000đ vào ví
+            ViDienTu vi = new ViDienTu(200000);
+
+            // Khách tiến hành thanh toán và áp mã "GIAM20"
+            don.ThanhToan(vi, "GIAM20");
+
+
+            // ================= 5. GIAO HÀNG =================
+            Console.WriteLine("\n====== GIAO HANG ======");
+            don.GanTaiXe(tx);
+            don.HoanThanhDon();
+
+
+            // ================= 6. BÁO CÁO NGHIỆP VỤ (KIỂM TRA CHIA TIỀN) =================
+            Console.WriteLine("\n====== KET QUA KINH DOANH SAU 1 DON HANG ======");
+            don.InHoaDon();
+            Console.WriteLine("-------------------------------------------------");
+
+            // Kiểm tra xem tiền có chia đúng theo chiết khấu 25% (Quán) và 20% (Tài xế) không
+            Console.WriteLine($"Tong tien Khach Hang da chi ra: {kh.TongDaChi}đ");
+            Console.WriteLine($"Doanh thu Chu Quan (Da bi app tru 25%): {cq.TongDoanhThu}đ");
+            Console.WriteLine($"Thu nhap Tai Xe (Da bi app tru 20%): {tx.TongThuNhap}đ");
+
+            Console.ReadLine(); // Dừng màn hình để xem kết quả
         }
     }
 }

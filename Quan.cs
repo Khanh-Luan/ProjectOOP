@@ -145,10 +145,10 @@ namespace ITFood
             }
         }
 
-        //public void NhanDon(DonHang don)
-        //{
-        //    Console.WriteLine($"[Thong bao quan {this.sTen}] Nhan duoc don {don.Ma}, bat dau lam mon!!!");
-        //    don.CapNhatTrangThai(TrangThaiDon.DangLam);
-        //}
+        public void NhanDon(DonHang don)
+        {
+            Console.WriteLine($"[Thong bao quan {this.sTen}] Nhan duoc don {don.Ma}, bat dau lam mon!!!");
+            don.CapNhatTrangThai(TrangThaiDon.DangLam);
+        }
     }
 }
