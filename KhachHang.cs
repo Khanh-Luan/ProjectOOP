@@ -35,7 +35,6 @@ namespace ProjectOOP
 
         public override void Nhap()
         {
-            Console.WriteLine("!! Khach hang !!");
             base.Nhap();
             Console.Write("Nhap dia chi giao: ");
             this.DiaChiGiao = Console.ReadLine();
@@ -44,7 +43,7 @@ namespace ProjectOOP
         public override void Xuat()
         {
 
-            Console.WriteLine("---Thong tin khach hang---");
+            Console.WriteLine("---- Thong tin khach hang ----");
             base.Xuat();
             Console.WriteLine($"Dia chi giao: {this.sDiaChiGiao}");
             Console.WriteLine($"Diem tich luy ITFood: {this.iDiemTichLuyITFood}");

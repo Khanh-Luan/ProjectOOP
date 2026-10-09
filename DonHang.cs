@@ -209,6 +209,7 @@ namespace ITFood
             if (this.dSoTienGiamGia > 0)
                 Console.WriteLine($"Giam gia voucher: -{this.dSoTienGiamGia}đ");
             Console.WriteLine($"Phi ship: {TinhPhiShip()}đ");
+            Console.WriteLine($"Phi nen tang: {Phi_nen_tang}đ");
             Console.WriteLine($"Tong thanh toan: {this.dSoTienDaThanhToan}đ");
             Console.WriteLine($"Trang thai: {trangThai}");
         }

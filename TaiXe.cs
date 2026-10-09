@@ -49,8 +49,6 @@ namespace ITFood
 
         public override void Nhap()
         {
-
-            Console.WriteLine("!! Tai xe !!");
             base.Nhap();
             Console.Write("Nhap bien so xe: ");
             this.BienSo = Console.ReadLine();

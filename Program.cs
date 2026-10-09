@@ -1,73 +1,216 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// ================= CHAY THU =================
 using ITFood;
 using ProjectOOP;
-namespace ITFood
+
+class Program
 {
-    class Program
+    static void NhapMenu(Quan quan)
     {
-        static void Main(string[] args)
+        Console.WriteLine("Nhap so mon trong menu: ");
+        int soMonMenu = Convert.ToInt32(Console.ReadLine());
+
+        for (int i = 0; i < soMonMenu; i++)
         {
-            // ================= 1. TẠO SẴN DỮ LIỆU GIẢ LẬP =================
-            // Tạo Khách
-            KhachHang kh = new KhachHang("KH01", "Nguyen Van A", "0901234567", "a@gmail.com", "123 Le Loi");
-
-            // Tạo Chủ quán & Quán
-            ChuQuan cq = new ChuQuan("CQ01", "Tran B", "0987654321", "b@gmail.com");
-            Quan quan = new Quan("Q01", "Pho Pasteur", "456 Pasteur");
-            cq.ThemQuan(quan); // Liên kết quán này thuộc về chủ CQ01
-
-            // Thêm món vào Menu
-            quan.ThemMon(new MonAn("M01", "Pho Bo Tai", 50000));
-            quan.ThemMon(new MonAn("M02", "Tra Da", 5000));
-
-            // Thêm Voucher giảm 20%
-            Voucher v = new Voucher("GIAM20", "Giam 20 phan tram", 20);
-            quan.ThemVoucher(v);
-
-            // Tạo Tài xế
-            TaiXe tx = new TaiXe("TX01", "Le Van C", "0911111111", "c@gmail.com", "59X1-12345");
-
-
-            // ================= 2. BẮT ĐẦU LUỒNG ĐẶT HÀNG =================
-            Console.WriteLine("====== KHACH HANG DAT DON ======");
-            DonHang don = new DonHang("DH001", kh, quan);
-
-            // Gọi hàm Nhap() để hiện Menu và cho khách nhập món, nhập km
-            don.Nhap();
-
-
-            // ================= 3. QUÁN NHẬN VÀ LÀM MÓN =================
-            Console.WriteLine("\n====== QUAN XAC NHAN ======");
-            quan.NhanDon(don);
-
-
-            // ================= 4. THANH TOAN =================
-            Console.WriteLine("\n====== THANH TOAN ======");
-            // Giả lập khách hàng xài Ví điện tử, nạp sẵn 200.000đ vào ví
-            ViDienTu vi = new ViDienTu(200000);
-
-            // Khách tiến hành thanh toán và áp mã "GIAM20"
-            don.ThanhToan(vi, "GIAM20");
-
-
-            // ================= 5. GIAO HÀNG =================
-            Console.WriteLine("\n====== GIAO HANG ======");
-            don.GanTaiXe(tx);
-            don.HoanThanhDon();
-
-
-            // ================= 6. BÁO CÁO NGHIỆP VỤ (KIỂM TRA CHIA TIỀN) =================
-            Console.WriteLine("\n====== KET QUA KINH DOANH SAU 1 DON HANG ======");
-            don.InHoaDon();
-            Console.WriteLine("-------------------------------------------------");
-
-            // Kiểm tra xem tiền có chia đúng theo chiết khấu 25% (Quán) và 20% (Tài xế) không
-            Console.WriteLine($"Tong tien Khach Hang da chi ra: {kh.TongDaChi}đ");
-            Console.WriteLine($"Doanh thu Chu Quan (Da bi app tru 25%): {cq.TongDoanhThu}đ");
-            Console.WriteLine($"Thu nhap Tai Xe (Da bi app tru 20%): {tx.TongThuNhap}đ");
-
-            Console.ReadLine(); // Dừng màn hình để xem kết quả
+            Console.WriteLine($"\n--- Nhap mon {i + 1} ---");
+            MonAn mon = new MonAn();
+            mon.Nhap();
+            quan.ThemMon(mon);
         }
+    }
+
+    static void NhapVoucher(Quan quan)
+    {
+        Console.WriteLine("Nhap so voucher cua quan: ");
+        int soVoucher = Convert.ToInt32(Console.ReadLine());
+
+        for (int i = 0; i < soVoucher; i++)
+        {
+            Console.WriteLine($"\n--- Nhap voucher {i + 1} ---");
+            Voucher v = new Voucher();
+            v.Nhap();
+            quan.ThemVoucher(v);
+        }
+    }
+
+    static PhuongThucThanhToan ChonPhuongThucThanhToan()
+    {
+        Console.WriteLine("Chon phuong thuc thanh toan:");
+        Console.WriteLine("1 - Tien mat");
+        Console.WriteLine("2 - Vi dien tu");
+        Console.WriteLine("3 - The");
+        Console.Write("Lua chon: ");
+
+        string chon = Console.ReadLine();
+
+        switch (chon)
+        {
+            case "2":
+                ViDienTu vi = new ViDienTu();
+                vi.Nhap();
+                return vi;
+            case "3":
+                The the = new The();
+                the.Nhap();
+                return the;
+            default:
+                return new TienMat();
+        }
+    }
+
+    static string ChonVoucher(Quan quan)
+    {
+        if (!quan.CoVoucher())
+        {
+            Console.WriteLine("Quan nay hien khong co voucher khuyen mai.");
+            return null;
+        }
+
+        quan.HienThiVoucherConDung();
+        Console.WriteLine("Nhap ma voucher muon dung (bo trong neu khong dung): ");
+        string maVoucher = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(maVoucher))
+            return null;
+
+        return maVoucher;
+    }
+
+    static void Main(string[] args)
+    {
+        UngDung app = new UngDung();
+
+        // Khai báo sẵn các biến chứa dữ liệu (Không dùng static, chuẩn bài trên lớp)
+        ChuQuan cq = new ChuQuan();
+        Quan quan = new Quan();
+        KhachHang kh = new KhachHang();
+        TaiXe tx = new TaiXe();
+
+        int luaChon = -1;
+        do
+        {
+            Console.WriteLine("================ HE THONG ITFOOD ================");
+            Console.WriteLine("1. Nhap du lieu he thong (Khach, Quan, Menu, Tai Xe)");
+            Console.WriteLine("2. Khach hang Tao don & Thanh toan");
+            Console.WriteLine("3. Hien thi ket qua (Bao cao he thong, Doanh thu)");
+            Console.WriteLine("0. Thoat");
+            Console.WriteLine("=================================================");
+            Console.Write("Chon chuc nang: ");
+            luaChon = Convert.ToInt32(Console.ReadLine());
+
+            switch (luaChon)
+            {
+                case 1:
+                    // 1. Khởi tạo dư liệu
+                    Console.WriteLine("\n--- NHAP THONG TIN CHU QUAN ---");
+                    cq.Nhap();
+                    app.ThemChuQuan(cq);
+
+                    Console.WriteLine("\n--- NHAP THONG TIN QUAN ---");
+                    quan.Nhap();
+                    cq.ThemQuan(quan);
+                    app.ThemQuan(quan);
+
+                    NhapMenu(quan);
+                    NhapVoucher(quan);
+
+                    Console.WriteLine("\n--- NHAP THONG TIN KHACH HANG ---");
+                    kh.Nhap();
+                    app.ThemKhachHang(kh);
+
+                    Console.WriteLine("\n--- NHAP THONG TIN TAI XE ---");
+                    tx.Nhap();
+                    app.ThemTaiXe(tx);
+                    break;
+
+                case 2:
+                    // 2. Tạo đơn hàng
+                    Console.WriteLine("\n--- TAO DON HANG ---");
+                    Console.WriteLine("Nhap ma don hang: ");
+                    string maDon = Console.ReadLine();
+                    DonHang don = app.TaoDonHang(maDon, kh, quan);
+
+                    if (don == null)
+                    {
+                        Console.WriteLine("Khong the tao don hang. Ket thuc.");
+                        break; // Dùng break thay vì return để không bị văng khỏi vòng lặp
+                    }
+
+                    don.Nhap();
+
+                    // 3. Quán nhận đơn
+                    Console.WriteLine("\n---- QUAN NHAN DON ----");
+                    quan.NhanDon(don);
+
+                    // Hủy đơn (nếu khách hàng muốn)
+                    Console.Write("Ban co muon huy don khong? (y/n): ");
+                    string huyChon = Console.ReadLine();
+                    if (huyChon == "y" || huyChon == "Y")
+                    {
+                        don.HuyDon();
+                        Console.WriteLine("\n---- HOA DON ----");
+                        don.InHoaDon();
+                        break;
+                    }
+
+                    // 4. Thanh toán
+                    Console.WriteLine("\n---- THANH TOAN ----");
+                    PhuongThucThanhToan ptTT = ChonPhuongThucThanhToan();
+                    string maVoucher = ChonVoucher(quan);
+
+                    bool thanhCong = don.ThanhToan(ptTT, maVoucher);
+
+                    if (!thanhCong)
+                    {
+                        Console.WriteLine("Chuyen sang thanh toan bang tien mat.");
+                        ptTT = new TienMat();
+                        thanhCong = don.ThanhToan(ptTT, maVoucher);
+                    }
+
+                    if (!thanhCong)
+                    {
+                        Console.WriteLine("Khong the thanh toan don hang.");
+                        break;
+                    }
+
+                    // 5. Phân công tài xế
+                    Console.WriteLine("\n---- PHAN CONG TAI XE ----");
+                    app.TimTaiXeRanhVaGanDon(don);
+
+                    // 6. Giao hàng
+                    Console.WriteLine("\n---- GIAO HANG ----");
+                    if (don.TrangThai == TrangThaiDon.DangGiao)
+                        don.HoanThanhDon();
+                    else
+                        Console.WriteLine("Don hang chua duoc giao vi chua co tai xe.");
+
+                    // In hóa đơn
+                    Console.WriteLine("\n---- HOA DON ----");
+                    don.InHoaDon();
+                    break;
+
+                case 3:
+                    // 7. Hiển thị kết quả
+                    quan.Xuat();
+                    quan.HienThiVoucherDaDung();
+                    kh.Xuat();
+                    app.BaoCao();
+                    break;
+
+                case 0:
+                    Console.WriteLine("Ket thuc chuong trinh !!!");
+                    break;
+
+                default:
+                    Console.WriteLine("Chuc nang khong hop le.");
+                    break;
+            }
+
+            if (luaChon != 0)
+            {
+                Console.WriteLine("\n[Nhan Enter de quay lai Menu...]");
+                Console.ReadLine();
+            }
+
+        } while (luaChon != 0);
     }
 }

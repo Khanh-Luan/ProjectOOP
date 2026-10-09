@@ -55,12 +55,11 @@ namespace ITFood
 
         public void Nhap()
         {
-            Console.WriteLine("--- Thong tin cua quan ---");
-            Console.WriteLine("Nhap ma quan: ");
+            Console.Write("Nhap ma quan: ");
             this.Ma = Console.ReadLine();
-            Console.WriteLine("Nhap ten quan: ");
+            Console.Write("Nhap ten quan: ");
             this.Ten = Console.ReadLine();
-            Console.WriteLine("Nhap dia chi cua quan: ");
+            Console.Write("Nhap dia chi cua quan: ");
             this.DiaChi = Console.ReadLine();
             this.bDangMoCua = true;
         }
@@ -122,6 +121,7 @@ namespace ITFood
 
         public void HienThiVoucherDaDung()
         {
+            Console.WriteLine("\n---- VOUCHER DA DUNG ----");
             Console.WriteLine($"Voucher da dung cua quan {this.sTen}: ");
             foreach (Voucher v in dsVoucher)
             {
@@ -131,7 +131,7 @@ namespace ITFood
 
         public void Xuat()
         {
-            Console.WriteLine($"===== THONG TIN QUAN =====");
+            Console.WriteLine($"---- THONG TIN QUAN ----");
             Console.WriteLine($"Ma quan: {this.sMa}");
             Console.WriteLine($"Ten quan: {this.sTen}");
             Console.WriteLine($"Dia chi: {this.sDiaChi}");
