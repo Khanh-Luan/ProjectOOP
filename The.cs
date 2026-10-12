@@ -37,6 +37,8 @@ namespace ITFood
             this.PhiGiaoDich = The.PHI_GIAO_DICH_MAC_DINH;
         }
 
+        ~The() { }
+
         public void Nhap()
         {
             Console.WriteLine("Nhap ID the: ");

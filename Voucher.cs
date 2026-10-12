@@ -37,7 +37,10 @@ namespace ITFood
             set { this.bConSuDung = value; }
         }
 
-        public Voucher() { }
+        public Voucher()
+        {
+            this.ConSuDung = true;
+        }
 
         public Voucher(string ma, string ten, double phanTram)
         {
@@ -46,6 +49,8 @@ namespace ITFood
             this.PhanTram = phanTram;
             this.ConSuDung = true;
         }
+
+        ~Voucher() { }
 
         public double TinhGiam(double tienMon)
         {

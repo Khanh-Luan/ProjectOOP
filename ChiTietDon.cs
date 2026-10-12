@@ -28,6 +28,8 @@ namespace ITFood
             this.SoLuong = soLuong;
         }
 
+        ~ChiTietDon() { }
+
         public double ThanhTien()
         {
             return this.mon.Gia * this.iSoLuong;

@@ -35,6 +35,8 @@ namespace ITFood
         public TaiXe()
         {
             this.DangRanh = true;
+            this.SoDonDaGiao = 0;
+            this.TongThuNhap = 0;
         }
 
         public TaiXe(string ma, string ten, string sdt, string email, string bienSo)
@@ -45,6 +47,8 @@ namespace ITFood
             this.SoDonDaGiao = 0;
             this.TongThuNhap = 0;
         }
+
+        ~TaiXe() { }
 
         public override void TinhToanTien(double soTien)
         {

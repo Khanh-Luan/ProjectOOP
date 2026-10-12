@@ -13,12 +13,17 @@ namespace ITFood
             set { this.dSoDu = value; }
         }
 
-        public ViDienTu() { }
+        public ViDienTu()
+        {
+            this.SoDu = 0;
+        }
 
         public ViDienTu(double soDu)
         {
             this.SoDu = soDu;
         }
+
+        ~ViDienTu() { }
 
         public void Nhap()
         {

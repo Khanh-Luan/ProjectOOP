@@ -26,7 +26,11 @@ namespace ITFood
             set { this.dTongDaChi = value; }
         }
 
-        public KhachHang() { }
+        public KhachHang()
+        {
+            this.DiemTichLuyITFood = 0;
+            this.TongDaChi = 0;
+        }
 
         public KhachHang(string ma, string ten, string sdt, string email, string diaChi)
             : base(ma, ten, sdt, email)
@@ -35,6 +39,8 @@ namespace ITFood
             this.DiemTichLuyITFood = 0;
             this.TongDaChi = 0; 
         }
+
+        ~KhachHang() { }
 
         public override void Nhap()
         {

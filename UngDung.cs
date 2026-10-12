@@ -47,6 +47,17 @@ namespace ITFood
             this.DsDonHang = new List<DonHang>();
         }
 
+        public UngDung(List<KhachHang> dsKhachHang, List<ChuQuan> dsChuQuan, List<TaiXe> dsTaiXe, List<Quan> dsQuan, List<DonHang> dsDonHang)
+        {
+            this.DsKhachHang = dsKhachHang;
+            this.DsChuQuan = dsChuQuan;
+            this.DsTaiXe = dsTaiXe;
+            this.DsQuan = dsQuan;
+            this.DsDonHang = dsDonHang;
+        }
+
+        ~UngDung() { }
+
         public void ThemKhachHang(KhachHang kh)
         {
             this.dsKhachHang.Add(kh);

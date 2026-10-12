@@ -23,6 +23,7 @@ namespace ITFood
         public ChuQuan()
         {
             this.DsQuan = new List<Quan>();
+            this.TongDoanhThu = 0;
         }
 
         public ChuQuan(string ma, string ten, string sdt, string email)
@@ -31,6 +32,8 @@ namespace ITFood
             this.DsQuan = new List<Quan>();
             this.TongDoanhThu = 0;
         }
+
+        ~ChuQuan() { }
 
         public void ThemQuan(Quan quan)
         {

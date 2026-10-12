@@ -40,6 +40,8 @@ namespace ITFood
             this.Gia = gia;
         }
 
+        ~MonAn() { }
+
         public void Nhap()
         {
             Console.Write("Nhap ma mon an: ");

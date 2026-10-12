@@ -67,6 +67,8 @@ namespace ITFood
             this.DsVoucher = new List<Voucher>();
         }
 
+        ~Quan() { }
+
         public void Nhap()
         {
             Console.Write("Nhap ma quan: ");

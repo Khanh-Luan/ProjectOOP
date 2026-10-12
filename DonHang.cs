@@ -86,6 +86,14 @@ namespace ITFood
             set { this.dSoTienGiamGia = value; }
         }
 
+        public DonHang()
+        {
+            this.DsChiTiet = new List<ChiTietDon>();
+            this.TrangThai = TrangThaiDon.ChoXacNhan;
+            this.SoTienDaThanhToan = 0;
+            this.SoTienGiamGia = 0;
+        }
+
         public DonHang(string ma, KhachHang khach, Quan quan)
         {
             this.Ma = ma;
@@ -93,7 +101,11 @@ namespace ITFood
             this.Quan = quan;
             this.DsChiTiet = new List<ChiTietDon>();
             this.TrangThai = TrangThaiDon.ChoXacNhan;
+            this.SoTienDaThanhToan = 0;
+            this.SoTienGiamGia = 0;
         }
+
+        ~DonHang() { }
 
         public void GoiMon(MonAn mon, int soLuong)
         {
