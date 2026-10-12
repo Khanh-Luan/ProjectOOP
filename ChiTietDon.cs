@@ -35,7 +35,7 @@ namespace ITFood
 
         public void HienThi()
         {
-            Console.WriteLine($"{this.mon.Ten} x {this.iSoLuong} = {ThanhTien()}đ");
+            Console.WriteLine($"{this.mon.Ten} x {this.iSoLuong} = {this.ThanhTien()}đ");
         }
     }
 }

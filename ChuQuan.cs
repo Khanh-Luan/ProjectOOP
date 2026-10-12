@@ -34,13 +34,13 @@ namespace ITFood
 
         public void ThemQuan(Quan quan)
         {
-            dsQuan.Add(quan);
+            this.dsQuan.Add(quan);
             quan.ChuCuaQuan = this; // Gán chủ quán cho quán vừa thêm
         }
 
         public Quan TimQuan(string ma)
         {
-            foreach (Quan quan in dsQuan)
+            foreach (Quan quan in this.dsQuan)
             {
                 if (quan.Ma == ma) return quan;
             }
@@ -50,7 +50,7 @@ namespace ITFood
         public void HienThiDsQuan()
         {
             Console.WriteLine($"Danh sach quan cua chu quan {this.sTen}");
-            foreach (Quan quan in dsQuan)
+            foreach (Quan quan in this.dsQuan)
             {
                 Console.WriteLine($" {quan.Ma} - {quan.Ten} - {quan.DiaChi}");
             }
@@ -60,7 +60,7 @@ namespace ITFood
         {
             Console.WriteLine("---Thong tin chu quan---");
             base.Xuat();
-            Console.WriteLine($"So quan chu so huu: {dsQuan.Count}");
+            Console.WriteLine($"So quan chu so huu: {this.dsQuan.Count}");
             Console.WriteLine($"Tong doanh thu: {this.dTongDoanhThu}đ");
         }
 

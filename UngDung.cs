@@ -49,27 +49,27 @@ namespace ITFood
 
         public void ThemKhachHang(KhachHang kh)
         {
-            dsKhachHang.Add(kh);
+            this.dsKhachHang.Add(kh);
         }
 
         public void ThemChuQuan(ChuQuan cq)
         {
-            dsChuQuan.Add(cq);
+            this.dsChuQuan.Add(cq);
         }
 
         public void ThemTaiXe(TaiXe tx)
         {
-            dsTaiXe.Add(tx);
+            this.dsTaiXe.Add(tx);
         }
 
         public void ThemQuan(Quan q)
         {
-            dsQuan.Add(q);
+            this.dsQuan.Add(q);
         }
 
         public TaiXe TimTaiXeRanh()
         {
-            foreach (TaiXe tx in dsTaiXe)
+            foreach (TaiXe tx in this.dsTaiXe)
             {
                 if (tx.DangRanh) return tx;
             }
@@ -78,7 +78,7 @@ namespace ITFood
 
         public void TimTaiXeRanhVaGanDon(DonHang don)
         {
-            TaiXe tx = TimTaiXeRanh();
+            TaiXe tx = this.TimTaiXeRanh();
             if (tx != null) 
                 don.GanTaiXe(tx);   
             else 
@@ -94,7 +94,7 @@ namespace ITFood
                 return null;
             }
             DonHang don = new DonHang(ma, kh, quan);
-            dsDonHang.Add(don);
+            this.dsDonHang.Add(don);
             return don;
         }
 
@@ -103,18 +103,18 @@ namespace ITFood
             Console.WriteLine("----- BAO CAO HE THONG -----");
             int soDonHoanThanh = 0;
             int soDonHuy = 0;   
-            for (int i = 0; i < dsDonHang.Count; i++)
+            for (int i = 0; i < this.dsDonHang.Count; i++)
             {
-                if (dsDonHang[i].TrangThai == TrangThaiDon.HoanThanh)
+                if (this.dsDonHang[i].TrangThai == TrangThaiDon.HoanThanh)
                     soDonHoanThanh++;
-                if (dsDonHang[i].TrangThai == TrangThaiDon.DaHuy)
+                if (this.dsDonHang[i].TrangThai == TrangThaiDon.DaHuy)
                     soDonHuy++;
             }
             Console.WriteLine($"Don hoan thanh: {soDonHoanThanh}");
             Console.WriteLine($"Don da huy: {soDonHuy}");
 
             Console.WriteLine("--- Thong tin tai xe ---");
-            foreach (TaiXe tx in dsTaiXe)
+            foreach (TaiXe tx in this.dsTaiXe)
             {
                 tx.Xuat();
                 Console.WriteLine();

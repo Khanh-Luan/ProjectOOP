@@ -80,12 +80,12 @@ namespace ITFood
 
         public void ThemMon(MonAn mon)
         {
-            menu.Add(mon);
+            this.menu.Add(mon);
         }
 
         public MonAn TimMon(string ma)
         {
-            foreach (MonAn mon in menu)
+            foreach (MonAn mon in this.menu)
             {
                 if (mon.Ma == ma) return mon;
             }
@@ -95,7 +95,7 @@ namespace ITFood
         public void HienThiMenu()
         {
             Console.WriteLine($"--- Menu cua quan {this.sTen} ---");
-            foreach (MonAn mon in menu)
+            foreach (MonAn mon in this.menu)
             {
                 Console.WriteLine($" {mon.Ma} - {mon.Ten} - {mon.Gia} ");
             }
@@ -103,12 +103,12 @@ namespace ITFood
         // Quản lí voucher của quán
         public void ThemVoucher(Voucher v)
         {
-            dsVoucher.Add(v);
+            this.dsVoucher.Add(v);
         }
 
         public Voucher TimVoucher(string ma)
         {
-            foreach (Voucher v in dsVoucher)
+            foreach (Voucher v in this.dsVoucher)
             {
                 if (v.Ma == ma) return v;
             }
@@ -117,7 +117,7 @@ namespace ITFood
 
         public bool CoVoucher()
         {
-            foreach (Voucher v in dsVoucher)
+            foreach (Voucher v in this.dsVoucher)
             {
                 if (v.ConSuDung) return true;
             }
@@ -127,7 +127,7 @@ namespace ITFood
         public void HienThiVoucherConDung()
         {
             Console.WriteLine($"Voucher hien co cua quan {this.sTen}: ");
-            foreach (Voucher v in dsVoucher)
+            foreach (Voucher v in this.dsVoucher)
             {
                 if (v.ConSuDung) v.Xuat();
             }
@@ -137,7 +137,7 @@ namespace ITFood
         {
             Console.WriteLine("\n---- VOUCHER DA DUNG ----");
             Console.WriteLine($"Voucher da dung cua quan {this.sTen}: ");
-            foreach (Voucher v in dsVoucher)
+            foreach (Voucher v in this.dsVoucher)
             {
                 if (!v.ConSuDung) v.Xuat();
             }
@@ -150,12 +150,12 @@ namespace ITFood
             Console.WriteLine($"Ten quan: {this.sTen}");
             Console.WriteLine($"Dia chi: {this.sDiaChi}");
             Console.WriteLine($"Dang mo cua: {this.bDangMoCua}");
-            Console.WriteLine($"So mon trong menu: {menu.Count}");
-            Console.WriteLine($"So voucher: {dsVoucher.Count}");
-            if (chuQuan != null)
+            Console.WriteLine($"So mon trong menu: {this.menu.Count}");
+            Console.WriteLine($"So voucher: {this.dsVoucher.Count}");
+            if (this.chuQuan != null)
             {
-                Console.WriteLine($"Chu quan: {chuQuan.Ten} (Ma: {chuQuan.Ma})");
-                Console.WriteLine($"Doanh thu cua chu: {chuQuan.TongDoanhThu}d");
+                Console.WriteLine($"Chu quan: {this.chuQuan.Ten} (Ma: {this.chuQuan.Ma})");
+                Console.WriteLine($"Doanh thu cua chu: {this.chuQuan.TongDoanhThu}d");
             }
         }
 

@@ -28,26 +28,26 @@ namespace ITFood
 
         public The()
         {
-            this.PhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
+            this.PhiGiaoDich = The.PHI_GIAO_DICH_MAC_DINH;
         }
 
         public The(string soThe)
         {
             this.SoThe = soThe;
-            this.PhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
+            this.PhiGiaoDich = The.PHI_GIAO_DICH_MAC_DINH;
         }
 
         public void Nhap()
         {
             Console.WriteLine("Nhap ID the: ");
             this.SoThe = Console.ReadLine();
-            this.PhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
+            this.PhiGiaoDich = The.PHI_GIAO_DICH_MAC_DINH;
         }
 
         public override bool XuLyThanhToan(double soTien)
         {
             double tongTien = soTien + this.dPhiGiaoDich;
-            Console.WriteLine($"Da thanh toan {soTien}đ bang the {this.sSoThe} + phi giao dich {this.dPhiGiaoDich}đ (Tong tru vao the: {tongTien}đ");
+            Console.WriteLine($"Da thanh toan {soTien}đ bang the {this.sSoThe} + phi giao dich {this.dPhiGiaoDich}đ (Tong tru vao the: {tongTien}đ)");
             return true;
         }
     }

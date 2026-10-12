@@ -98,12 +98,12 @@ namespace ITFood
         public void GoiMon(MonAn mon, int soLuong)
         {
             ChiTietDon ct = new ChiTietDon(mon, soLuong);
-            dsChiTiet.Add(ct);
+            this.dsChiTiet.Add(ct);
         }
 
         public void Nhap()
         {
-            quan.HienThiMenu();
+            this.quan.HienThiMenu();
             Console.WriteLine("Nhap so mon muon dat: ");
             int soMon = Convert.ToInt32(Console.ReadLine());
             for (int i = 0; i < soMon; i++)
@@ -112,10 +112,10 @@ namespace ITFood
                 string maMon = Console.ReadLine();
                 Console.WriteLine("Nhap so luong: ");
                 int soLuong = Convert.ToInt32(Console.ReadLine());
-                MonAn mon = quan.TimMon(maMon);
+                MonAn mon = this.quan.TimMon(maMon);
                 if (mon != null)
                 {
-                    GoiMon(mon, soLuong);
+                    this.GoiMon(mon, soLuong);
                 }
                 else
                 {
@@ -125,28 +125,28 @@ namespace ITFood
             Console.WriteLine("Nhap khoang cach giao (km): ");
             this.KhoangCachKm = Convert.ToDouble(Console.ReadLine());
             this.TrangThai = TrangThaiDon.ChoXacNhan;
-            Xuat();
+            this.Xuat();
         }
 
         public void CapNhatTrangThai(TrangThaiDon trangThaiMoi)
         {
-            trangThai = trangThaiMoi;
+            this.trangThai = trangThaiMoi;
         }
 
         public void Xuat()
         {
             Console.WriteLine($"---- DON HANG {this.sMa} ----");
-            foreach (ChiTietDon ct in dsChiTiet)
+            foreach (ChiTietDon ct in this.dsChiTiet)
             {
                 ct.HienThi();
             }
-            Console.WriteLine($"Trang thai: {trangThai}");
+            Console.WriteLine($"Trang thai: {this.trangThai}");
         }
 
         public double TongTienMon()
         {
             double tong = 0;
-            foreach (ChiTietDon ct in dsChiTiet)
+            foreach (ChiTietDon ct in this.dsChiTiet)
             {
                 tong = tong + ct.ThanhTien();
             }
@@ -166,15 +166,15 @@ namespace ITFood
         {
             if (maVoucher == null) 
                 return 0;
-            Voucher v = quan.TimVoucher(maVoucher);
+            Voucher v = this.quan.TimVoucher(maVoucher);
             if (v == null) 
                 return 0;
-            return v.TinhGiam(TongTienMon());
+            return v.TinhGiam(this.TongTienMon());
         }
 
         public double TongThanhToan(string maVoucher)
         {
-            return TongTienMon() - TinhGiamGia(maVoucher) + TinhPhiShip() + Phi_nen_tang;
+            return this.TongTienMon() - this.TinhGiamGia(maVoucher) + this.TinhPhiShip() + DonHang.Phi_nen_tang;
         }
 
         public void GanTaiXe(TaiXe tx)
@@ -188,11 +188,11 @@ namespace ITFood
         public bool ThanhToan(PhuongThucThanhToan ptTT, string maVoucher)
         {
             this.thanhToan = ptTT;
-            double giam = TinhGiamGia(maVoucher);
-            double tongTien = TongThanhToan(maVoucher);
+            double giam = this.TinhGiamGia(maVoucher);
+            double tongTien = this.TongThanhToan(maVoucher);
             this.dSoTienDaThanhToan = tongTien;
             this.dSoTienGiamGia = giam;
-            bool thanhCong = thanhToan.XuLyThanhToan(tongTien);
+            bool thanhCong = this.thanhToan.XuLyThanhToan(tongTien);
             if (thanhCong)
             {
                 // thanh toán thành công nhưng đơn chưa được giao
@@ -201,15 +201,15 @@ namespace ITFood
 
                 if (maVoucher != null)
                 {
-                    Voucher v = quan.TimVoucher(maVoucher);
+                    Voucher v = this.quan.TimVoucher(maVoucher);
                     if (v != null)
                     {
                         v.SuDung();
                     }
                 }
 
-                khach.TinhToanTien(tongTien);
-                double tienCuaQuan = (TongTienMon() - giam) * (1 - Chiet_khau_cua_quan);
+                this.khach.TinhToanTien(tongTien);
+                double tienCuaQuan = (this.TongTienMon() - giam) * (1 - DonHang.Chiet_khau_cua_quan);
                 this.quan.ChuCuaQuan.TinhToanTien(tienCuaQuan);
             }
             else
@@ -222,33 +222,33 @@ namespace ITFood
         // Hoàn tất giao hàng sau khi thanh toán và đã có tài xế
         public void HoanThanhDon()
         {
-            if (trangThai != TrangThaiDon.DangGiao)
+            if (this.trangThai != TrangThaiDon.DangGiao)
             {
                 Console.WriteLine("Don hang chua du dieu kien de hoan thanh.");
                 return;
             }
-            if (taiXe != null)
+            if (this.taiXe != null)
             {
-                double tienCuaTaiXe = TinhPhiShip() * (1 - Chiet_khau_cua_tai_xe);
-                taiXe.TinhToanTien(tienCuaTaiXe);
-                taiXe.HoanThanhGiao();
+                double tienCuaTaiXe = this.TinhPhiShip() * (1 - DonHang.Chiet_khau_cua_tai_xe);
+                this.taiXe.TinhToanTien(tienCuaTaiXe);
+                this.taiXe.HoanThanhGiao();
             }
 
-            trangThai = TrangThaiDon.HoanThanh;
+            this.trangThai = TrangThaiDon.HoanThanh;
             Console.WriteLine($"Don hang {this.sMa} da giao thanh cong.");
         }
 
         public void HuyDon()
         {
-            if (trangThai == TrangThaiDon.HoanThanh)
+            if (this.trangThai == TrangThaiDon.HoanThanh)
             {
                 Console.WriteLine("Khong the huy don da hoan thanh.");
                 return;
             }
-            trangThai = TrangThaiDon.DaHuy;
-            if (taiXe != null)
+            this.trangThai = TrangThaiDon.DaHuy;
+            if (this.taiXe != null)
             {
-                taiXe.DangRanh = true;
+                this.taiXe.DangRanh = true;
             }
             Console.WriteLine($"Don hang {this.sMa} da bi huy.");
         }
@@ -256,17 +256,17 @@ namespace ITFood
         public void InHoaDon()
         {
             Console.WriteLine($"---- HOA DON {this.sMa} ----");
-            foreach (ChiTietDon ct in dsChiTiet)
+            foreach (ChiTietDon ct in this.dsChiTiet)
             {
                 ct.HienThi();
             }
-            Console.WriteLine($"Tien mon: {TongTienMon()}đ");
+            Console.WriteLine($"Tien mon: {this.TongTienMon()}đ");
             if (this.dSoTienGiamGia > 0)
                 Console.WriteLine($"Giam gia voucher: -{this.dSoTienGiamGia}đ");
-            Console.WriteLine($"Phi ship: {TinhPhiShip()}đ");
-            Console.WriteLine($"Phi nen tang: {Phi_nen_tang}đ");
+            Console.WriteLine($"Phi ship: {this.TinhPhiShip()}đ");
+            Console.WriteLine($"Phi nen tang: {DonHang.Phi_nen_tang}đ");
             Console.WriteLine($"Tong thanh toan: {this.dSoTienDaThanhToan}đ");
-            Console.WriteLine($"Trang thai: {trangThai}");
+            Console.WriteLine($"Trang thai: {this.trangThai}");
         }
     }
 }
