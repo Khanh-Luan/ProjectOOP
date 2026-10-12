@@ -142,6 +142,7 @@ namespace ITFood
                         }
 
                         don.Nhap();
+                        don.Xuat();
 
                         // 3. Quán nhận đơn
                         Console.WriteLine("\n---- QUAN NHAN DON ----");

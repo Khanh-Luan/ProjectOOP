@@ -125,7 +125,6 @@ namespace ITFood
             Console.WriteLine("Nhap khoang cach giao (km): ");
             this.KhoangCachKm = Convert.ToDouble(Console.ReadLine());
             this.TrangThai = TrangThaiDon.ChoXacNhan;
-            this.Xuat();
         }
 
         public void CapNhatTrangThai(TrangThaiDon trangThaiMoi)
