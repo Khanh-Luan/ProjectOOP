@@ -47,7 +47,7 @@ namespace ITFood
         public override bool XuLyThanhToan(double soTien)
         {
             double tongTien = soTien + this.dPhiGiaoDich;
-            Console.WriteLine($"Da thanh toan {tongTien}đ bang the {this.sSoThe} ( bao gom phi giao dich {this.dPhiGiaoDich}đ)");
+            Console.WriteLine($"Da thanh toan {soTien}đ bang the {this.sSoThe} + phi giao dich {this.dPhiGiaoDich}đ (Tong tru vao the: {tongTien}đ");
             return true;
         }
     }
