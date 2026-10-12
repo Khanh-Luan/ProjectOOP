@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOOP
+namespace ITFood
 {
     public class Voucher
     {
@@ -11,22 +11,30 @@ namespace ProjectOOP
         private double dPhanTram;
         private bool bConSuDung;
 
-        public string Ma { 
-            get { return this.sMa; } 
-            set { this.sMa = value; } 
+        public string Ma
+        {
+            get { return this.sMa; }
+            set { this.sMa = value; }
         }
-        public string Ten { 
-            get { return this.sTen; } 
-            set { this.sTen = value; } 
+        public string Ten
+        {
+            get { return this.sTen; }
+            set { this.sTen = value; }
         }
-        public double PhanTram { 
+        public double PhanTram
+        {
             get { return this.dPhanTram; }
-            set { if (value <= 0 || value >100)
+            set
+            {
+                if (value <= 0 || value > 100)
                     throw new ArgumentOutOfRangeException(nameof(value), "Phan tram giam phai lon hon 0% va khong vuot qua 100%.");
-                  this.dPhanTram = value; }
+                this.dPhanTram = value;
+            }
         }
-        public bool ConSuDung { 
+        public bool ConSuDung
+        {
             get { return this.bConSuDung; }
+            set { this.bConSuDung = value; }
         }
 
         public Voucher() { }
@@ -36,7 +44,7 @@ namespace ProjectOOP
             this.Ma = ma;
             this.Ten = ten;
             this.PhanTram = phanTram;
-            this.bConSuDung = true;
+            this.ConSuDung = true;
         }
 
         public double TinhGiam(double tienMon)
@@ -59,7 +67,7 @@ namespace ProjectOOP
             this.Ten = Console.ReadLine();
             Console.Write("Nhap phan tram cua voucher (1 - 100): ");
             this.PhanTram = Convert.ToDouble(Console.ReadLine());
-            this.bConSuDung = true;
+            this.ConSuDung = true;
         }
 
         public void Xuat()

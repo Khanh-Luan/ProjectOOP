@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,20 +9,22 @@ namespace ITFood
         private MonAn mon;
         private int iSoLuong;
 
-        public MonAn Mon { 
-            get { return this.mon; } 
-            set { this.mon = value; } 
+        public MonAn Mon
+        {
+            get { return this.mon; }
+            set { this.mon = value; }
         }
-        public int SoLuong { 
-            get { return this.iSoLuong; } 
-            set { this.iSoLuong = value; } 
+        public int SoLuong
+        {
+            get { return this.iSoLuong; }
+            set { this.iSoLuong = value; }
         }
 
         public ChiTietDon() { }
 
         public ChiTietDon(MonAn mon, int soLuong)
         {
-            this.mon = mon;
+            this.Mon = mon;
             this.SoLuong = soLuong;
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,20 +11,24 @@ namespace ITFood
         private int iSoDonDaGiao;
         private double dTongThuNhap;
 
-        public string BienSo { 
-            get { return this.sBienSo; } 
-            set { this.sBienSo = value; } 
+        public string BienSo
+        {
+            get { return this.sBienSo; }
+            set { this.sBienSo = value; }
         }
-        public bool DangRanh { 
-            get { return this.bDangRanh; } 
-            set { this.bDangRanh = value; } 
+        public bool DangRanh
+        {
+            get { return this.bDangRanh; }
+            set { this.bDangRanh = value; }
         }
-        public int SoDonDaGiao { 
-            get { return this.iSoDonDaGiao; } 
-            set { this.iSoDonDaGiao = value; } 
+        public int SoDonDaGiao
+        {
+            get { return this.iSoDonDaGiao; }
+            set { this.iSoDonDaGiao = value; }
         }
-        public double TongThuNhap { 
-            get { return this.dTongThuNhap; } 
+        public double TongThuNhap
+        {
+            get { return this.dTongThuNhap; }
             set { this.dTongThuNhap = value; }
         }
 
@@ -42,7 +46,7 @@ namespace ITFood
             this.TongThuNhap = 0;
         }
 
-        public override void TinhToanTien(double soTien) // Tai xe nhan het phi ship cua don hang
+        public override void TinhToanTien(double soTien)
         {
             this.TongThuNhap = this.TongThuNhap + soTien;   
         }

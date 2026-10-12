@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOOP
+namespace ITFood
 {
     public class KhachHang : NguoiDung
     {
@@ -10,15 +10,18 @@ namespace ProjectOOP
         private int iDiemTichLuyITFood;
         private double dTongDaChi;
 
-        public string DiaChiGiao { 
-            get { return this.sDiaChiGiao; } 
-            set { this.sDiaChiGiao = value; } 
+        public string DiaChiGiao
+        {
+            get { return this.sDiaChiGiao; }
+            set { this.sDiaChiGiao = value; }
         }
-        public int DiemTichLuyITFood { 
+        public int DiemTichLuyITFood
+        {
             get { return this.iDiemTichLuyITFood; }
             set { this.iDiemTichLuyITFood = value; }
         }
-        public double TongDaChi { 
+        public double TongDaChi
+        {
             get { return this.dTongDaChi; }
             set { this.dTongDaChi = value; }
         }

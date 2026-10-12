@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,27 +9,33 @@ namespace ITFood
         private List<Quan> dsQuan;
         private double dTongDoanhThu;
 
-        public double TongDoanhThu { 
-            get { return this.dTongDoanhThu; } 
+        public List<Quan> DsQuan
+        {
+            get { return this.dsQuan; }
+            set { this.dsQuan = value; }
+        }
+        public double TongDoanhThu
+        {
+            get { return this.dTongDoanhThu; }
             set { this.dTongDoanhThu = value; }
         }
 
         public ChuQuan()
         {
-            dsQuan = new List<Quan>();
+            this.DsQuan = new List<Quan>();
         }
 
         public ChuQuan(string ma, string ten, string sdt, string email)
             : base(ma, ten, sdt, email)
         {
-            dsQuan = new List<Quan>();
-            dTongDoanhThu = 0;
+            this.DsQuan = new List<Quan>();
+            this.TongDoanhThu = 0;
         }
 
         public void ThemQuan(Quan quan)
         {
             dsQuan.Add(quan);
-            quan.ChuCuaQuan = this; // sau khi thêm quán vào danh sách quán của mình thì cũng phải gán mình là chủ
+            quan.ChuCuaQuan = this; // Gán chủ quán cho quán vừa thêm
         }
 
         public Quan TimQuan(string ma)

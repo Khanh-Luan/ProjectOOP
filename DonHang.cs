@@ -1,4 +1,3 @@
-﻿using ProjectOOP;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,29 +13,86 @@ namespace ITFood
         private KhachHang khach;
         private Quan quan;
         private TaiXe taiXe;
-        private List<ChiTietDon> dsChiTiet; // dùng chi tiết đơn thay vì 2 list monAn và list soLuong
+        private List<ChiTietDon> dsChiTiet;
         private double dKhoangCachKm;
-        private TrangThaiDon trangThai; // dùng enum để cố định khỏi nhập sai
+        private TrangThaiDon trangThai;
         private PhuongThucThanhToan thanhToan;
         private double dSoTienDaThanhToan;
-        private double dSoTienGiamGia; // lưu số tiền giảm giá lại để in hóa đơn cho rõ ràng
+        private double dSoTienGiamGia;
 
-        public string Ma { 
+        public static double ChietKhauCuaQuan
+        {
+            get { return DonHang.Chiet_khau_cua_quan; }
+            set { DonHang.Chiet_khau_cua_quan = value; }
+        }
+        public static double ChietKhauCuaTaiXe
+        {
+            get { return DonHang.Chiet_khau_cua_tai_xe; }
+            set { DonHang.Chiet_khau_cua_tai_xe = value; }
+        }
+        public static double PhiNenTang
+        {
+            get { return DonHang.Phi_nen_tang; }
+            set { DonHang.Phi_nen_tang = value; }
+        }
+        public string Ma
+        {
             get { return this.sMa; }
             set { this.sMa = value; }
         }
-        public TrangThaiDon TrangThai { 
-            get { return trangThai; } 
-            set { trangThai = value; }
+        public KhachHang Khach
+        {
+            get { return this.khach; }
+            set { this.khach = value; }
+        }
+        public Quan Quan
+        {
+            get { return this.quan; }
+            set { this.quan = value; }
+        }
+        public TaiXe TaiXe
+        {
+            get { return this.taiXe; }
+            set { this.taiXe = value; }
+        }
+        public List<ChiTietDon> DsChiTiet
+        {
+            get { return this.dsChiTiet; }
+            set { this.dsChiTiet = value; }
+        }
+        public double KhoangCachKm
+        {
+            get { return this.dKhoangCachKm; }
+            set { this.dKhoangCachKm = value; }
+        }
+        public TrangThaiDon TrangThai
+        {
+            get { return this.trangThai; }
+            set { this.trangThai = value; }
+        }
+        public PhuongThucThanhToan PtThanhToan
+        {
+            get { return this.thanhToan; }
+            set { this.thanhToan = value; }
+        }
+        public double SoTienDaThanhToan
+        {
+            get { return this.dSoTienDaThanhToan; }
+            set { this.dSoTienDaThanhToan = value; }
+        }
+        public double SoTienGiamGia
+        {
+            get { return this.dSoTienGiamGia; }
+            set { this.dSoTienGiamGia = value; }
         }
 
         public DonHang(string ma, KhachHang khach, Quan quan)
         {
-            this.sMa = ma;
-            this.khach = khach;
-            this.quan = quan;
-            this.dsChiTiet = new List<ChiTietDon>();
-            this.trangThai = TrangThaiDon.ChoXacNhan;
+            this.Ma = ma;
+            this.Khach = khach;
+            this.Quan = quan;
+            this.DsChiTiet = new List<ChiTietDon>();
+            this.TrangThai = TrangThaiDon.ChoXacNhan;
         }
 
         public void GoiMon(MonAn mon, int soLuong)
@@ -45,7 +101,6 @@ namespace ITFood
             dsChiTiet.Add(ct);
         }
 
-        // kh nhập thông tin đặt hàng: chọn món trong menu của quán, nhập khoảng cách giao -> vì là project nhỏ nên phần này chưa xử lí được
         public void Nhap()
         {
             quan.HienThiMenu();
@@ -68,8 +123,8 @@ namespace ITFood
                 }
             }
             Console.WriteLine("Nhap khoang cach giao (km): ");
-            this.dKhoangCachKm = Convert.ToDouble(Console.ReadLine());
-            trangThai = TrangThaiDon.ChoXacNhan;
+            this.KhoangCachKm = Convert.ToDouble(Console.ReadLine());
+            this.TrangThai = TrangThaiDon.ChoXacNhan;
             Xuat();
         }
 

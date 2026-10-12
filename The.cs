@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,6 +10,11 @@ namespace ITFood
 
         private string sSoThe;
         private double dPhiGiaoDich;
+        public static double PhiGiaoDichMacDinh
+        {
+            get { return The.PHI_GIAO_DICH_MAC_DINH; }
+            set { The.PHI_GIAO_DICH_MAC_DINH = value; }
+        }
         public string SoThe
         {
             get { return this.sSoThe; }
@@ -23,26 +28,26 @@ namespace ITFood
 
         public The()
         {
-            this.dPhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
+            this.PhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
         }
 
         public The(string soThe)
         {
             this.SoThe = soThe;
-            this.dPhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
+            this.PhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
         }
 
         public void Nhap()
         {
             Console.WriteLine("Nhap ID the: ");
-            this.sSoThe = Console.ReadLine();
-            this.dPhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
+            this.SoThe = Console.ReadLine();
+            this.PhiGiaoDich = PHI_GIAO_DICH_MAC_DINH;
         }
 
         public override bool XuLyThanhToan(double soTien)
         {
             double tongTien = soTien + this.dPhiGiaoDich;
-            Console.WriteLine($"Da thanh toan {soTien}đ bang the {this.sSoThe} ( bao gom phi giao dich {this.dPhiGiaoDich}đ)");
+            Console.WriteLine($"Da thanh toan {tongTien}đ bang the {this.sSoThe} ( bao gom phi giao dich {this.dPhiGiaoDich}đ)");
             return true;
         }
     }

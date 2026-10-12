@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -23,7 +23,7 @@ namespace ITFood
         public void Nhap()
         {
             Console.WriteLine("Nhap so du vi: ");
-            this.dSoDu = Convert.ToDouble(Console.ReadLine());
+            this.SoDu = Convert.ToDouble(Console.ReadLine());
         }
 
         public override bool XuLyThanhToan(double soTien)

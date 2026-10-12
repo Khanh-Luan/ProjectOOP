@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,18 +10,22 @@ namespace ITFood
         protected string sTen;
         protected double dGia;
 
-        public string Ma { 
-            get { return this.sMa; } 
-            set { this.sMa = value; } 
+        public string Ma
+        {
+            get { return this.sMa; }
+            set { this.sMa = value; }
         }
-        public string Ten { 
-            get { return this.sTen; } 
+        public string Ten
+        {
+            get { return this.sTen; }
             set { this.sTen = value; }
         }
         public double Gia
         {
             get { return this.dGia; }
-            set { if (value <= 0)
+            set
+            {
+                if (value <= 0)
                     throw new ArgumentOutOfRangeException(nameof(value), "Gia cua mon an phai > 0.");
                 this.dGia = value;
             }

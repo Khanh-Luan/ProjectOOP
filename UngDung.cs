@@ -1,4 +1,3 @@
-﻿using ProjectOOP;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,13 +12,39 @@ namespace ITFood
         private List<Quan> dsQuan;
         private List<DonHang> dsDonHang;
 
+        public List<KhachHang> DsKhachHang
+        {
+            get { return this.dsKhachHang; }
+            set { this.dsKhachHang = value; }
+        }
+        public List<ChuQuan> DsChuQuan
+        {
+            get { return this.dsChuQuan; }
+            set { this.dsChuQuan = value; }
+        }
+        public List<TaiXe> DsTaiXe
+        {
+            get { return this.dsTaiXe; }
+            set { this.dsTaiXe = value; }
+        }
+        public List<Quan> DsQuan
+        {
+            get { return this.dsQuan; }
+            set { this.dsQuan = value; }
+        }
+        public List<DonHang> DsDonHang
+        {
+            get { return this.dsDonHang; }
+            set { this.dsDonHang = value; }
+        }
+
         public UngDung()
         {
-            dsKhachHang = new List<KhachHang>();
-            dsChuQuan = new List<ChuQuan>();
-            dsTaiXe = new List<TaiXe>();
-            dsQuan = new List<Quan>();
-            dsDonHang = new List<DonHang>();
+            this.DsKhachHang = new List<KhachHang>();
+            this.DsChuQuan = new List<ChuQuan>();
+            this.DsTaiXe = new List<TaiXe>();
+            this.DsQuan = new List<Quan>();
+            this.DsDonHang = new List<DonHang>();
         }
 
         public void ThemKhachHang(KhachHang kh)
