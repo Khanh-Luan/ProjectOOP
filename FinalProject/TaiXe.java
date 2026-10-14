@@ -14,7 +14,7 @@ public class TaiXe extends NguoiDung
     //properties
     public String getBienSo() 
     {
-        return this.sBienSo;
+        return sBienSo;
     }
     public void setBienSo(String bienSo) 
     {
@@ -22,7 +22,7 @@ public class TaiXe extends NguoiDung
     }
     public boolean isDangRanh() 
     {
-        return this.bDangRanh;
+        return bDangRanh;
     }
     public void setDangRanh(boolean dangRanh) 
     {
@@ -30,7 +30,7 @@ public class TaiXe extends NguoiDung
     }
     public int getSoDonDaGiao() 
     {
-        return this.iSoDonDaGiao;
+        return iSoDonDaGiao;
     }
     public void setSoDonDaGiao(int soDonDaGiao) 
     {
@@ -38,7 +38,7 @@ public class TaiXe extends NguoiDung
     }
     public double getTongThuNhap() 
     {
-        return this.dTongThuNhap;
+        return dTongThuNhap;
     }
     public void setTongThuNhap(double tongThuNhap) 
     {
@@ -48,6 +48,8 @@ public class TaiXe extends NguoiDung
     public TaiXe() 
     {
         this.bDangRanh = true;
+        this.iSoDonDaGiao = 0;
+        this.dTongThuNhap = 0;
     }
     public TaiXe(String ma, String ten, String sdt, String email, String bienSo) 
     {
@@ -78,8 +80,8 @@ public class TaiXe extends NguoiDung
     @Override 
     public void Xuat()
     {
+        System.out.println("----Thong tin tai xe----");
         super.Xuat();
-        System.out.println("~THONG TIN TAI XE: ");
         System.out.println("Bien so xe: " + this.sBienSo);
         System.out.println("Dang ranh: " + this.bDangRanh);
         System.out.println("So don da giao: " + this.iSoDonDaGiao);

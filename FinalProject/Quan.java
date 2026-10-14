@@ -76,8 +76,8 @@ public class Quan
     //constructor
     public Quan()
     {
-        this.menu = new ArrayList<>();
-        this.dsVoucher = new ArrayList<>();
+        this.menu = new ArrayList<MonAn>();
+        this.dsVoucher = new ArrayList<Voucher>();
         this.bDangMoCua = true;
     }
     public Quan(String ma, String ten, String diaChi) 
@@ -86,8 +86,8 @@ public class Quan
         this.sTen = ten;
         this.sDiaChi = diaChi;
         this.bDangMoCua = true;
-        this.menu = new ArrayList<>();
-        this.dsVoucher = new ArrayList<>();
+        this.menu = new ArrayList<MonAn>();
+        this.dsVoucher = new ArrayList<Voucher>();
     }
     // chỉ nhập thông tin của quán, việc gán chủ quán do ChuQuan.ThemQuan() lo
     public void Nhap() throws IOException 
@@ -141,7 +141,8 @@ public class Quan
         return null;
     }
 
-    public boolean CoVoucher() {
+    public boolean CoVoucher() 
+    {
         for (int i = 0; i < this.dsVoucher.size(); i++) 
         {
             if (this.dsVoucher.get(i).isConSuDung())
@@ -150,7 +151,8 @@ public class Quan
         return false;
     }
 
-    public void HienThiVoucherConDung() {
+    public void HienThiVoucherConDung() 
+    {
         System.out.println("Voucher hien co cua quan " + this.sTen + ":");
         for (int i = 0; i < this.dsVoucher.size(); i++) 
         {
@@ -160,7 +162,7 @@ public class Quan
 
     public void HienThiVoucherDaDung() 
     {
-        System.out.println("-VOUCHER DA DUNG-");
+        System.out.println("---VOUCHER DA DUNG---");
         System.out.println("Voucher da su dung cua quan " + this.sTen + ":");
         for (int i = 0; i < this.dsVoucher.size(); i++) 
         {
@@ -170,7 +172,7 @@ public class Quan
 
     //quán là class chính nên Xuất hiện thi đầy đủ thông tin, gồm cả chủ quán
     public void Xuat() {
-        System.out.println("-- THONG TIN QUAN --");
+        System.out.println("---THONG TIN QUAN---");
         System.out.println("Ma quan: " + this.sMa);
         System.out.println("Ten quan: " + this.sTen);
         System.out.println("Dia chi: " + this.sDiaChi);

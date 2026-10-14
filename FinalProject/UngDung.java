@@ -61,6 +61,14 @@ public class UngDung
         this.dsQuan= new ArrayList<Quan>();
         this.dsDonHang= new ArrayList<DonHang>();     
     }
+    public UngDung(List<KhachHang> dsKhachHang, List<ChuQuan> dsChuQuan, List<TaiXe> dsTaiXe, List<Quan> dsQuan, List<DonHang> dsDonHang)
+    {
+        this.dsKhachHang= dsKhachHang;
+        this.dsChuQuan= dsChuQuan;
+        this.dsTaiXe= dsTaiXe;
+        this.dsQuan= dsQuan;
+        this.dsDonHang= dsDonHang;
+    }
     //thêm quán
     public void ThemKhachHang(KhachHang kh)
     {

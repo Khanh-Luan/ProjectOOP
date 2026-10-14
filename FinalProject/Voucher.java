@@ -14,7 +14,7 @@ public class Voucher
     //properties
     public String getMa() 
     {
-        return this.sMa;
+        return sMa;
     }
     public void setMa(String ma) 
     {
@@ -22,7 +22,7 @@ public class Voucher
     }
     public String getTen() 
     {
-        return this.sTen;
+        return sTen;
     }
     public void setTen(String ten) 
     {
@@ -30,7 +30,7 @@ public class Voucher
     }
     public double getPhanTram() 
     {
-        return this.dPhanTram;
+        return dPhanTram;
     }
     public void setPhanTram(double phanTram) 
     {
@@ -39,7 +39,7 @@ public class Voucher
     }
     public boolean isConSuDung() 
     {
-        return this.bConSuDung;
+        return bConSuDung;
     }
     public void setConSuDung(boolean conSuDung) 
     {
@@ -48,7 +48,7 @@ public class Voucher
     //constructor
     public Voucher() 
     {
-
+        this.bConSuDung = true;
     }
     public Voucher(String ma, String ten, double phanTram) 
     {
@@ -84,13 +84,13 @@ public class Voucher
         this.sMa= br.readLine();
         System.out.println("Nhap ten voucher: ");
         this.sTen= br.readLine();
-        System.out.println("Nhap phan tram giam gia: ");
+        System.out.println("Nhap phan tram giam gia (1-100): ");
         setPhanTram(Double.parseDouble(br.readLine()));
         this.bConSuDung = true;
     }
     //hàm xuất
     public void Xuat()
     {
-        System.out.println("Voucher: " + this.sMa + "-" + this.sTen + "-" + this.dPhanTram + "% - " + (this.bConSuDung ? "Con su dung" : "Da su dung"));
+        System.out.println("Voucher: " + this.sMa + "-" + this.sTen + "- Giam: " + this.dPhanTram + "% - " + (this.bConSuDung ? "Con su dung" : "Da su dung"));
     }
 }

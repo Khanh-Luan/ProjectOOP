@@ -8,7 +8,7 @@ public class ChiTietDon
     //properties
     public MonAn getMon() 
     {
-        return this.mon;
+        return mon;
     }
     public void setMon(MonAn mon) 
     {
@@ -16,7 +16,7 @@ public class ChiTietDon
     }
     public int getSoLuong() 
     {
-        return this.iSoLuong;
+        return iSoLuong;
     }
     public void setSoLuong(int iSoLuong) 
     {
@@ -27,10 +27,10 @@ public class ChiTietDon
     {
 
     }
-    public ChiTietDon(MonAn mon, int iSoLuong)
+    public ChiTietDon(MonAn mon, int soLuong)
     {
         this.mon = mon;
-        this.iSoLuong = iSoLuong;
+        this.iSoLuong = soLuong;
     }
     //Thành tiền
     public double ThanhTien()
@@ -40,6 +40,6 @@ public class ChiTietDon
     //hàm xuất
     public void Xuat()
     {
-        System.out.println(this.mon.getMa() + "-" + this.mon.getTen() + "-" + this.mon.getGia() + "-" + this.iSoLuong + "- Thanh tien: " + ThanhTien());
+        System.out.println("Thanh tien: " +this.mon.getMa() + "-" + this.mon.getTen() + "-" + this.mon.getGia() + " x " + this.iSoLuong + "= " + ThanhTien() + "VND");
     }
 }

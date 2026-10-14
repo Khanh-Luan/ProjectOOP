@@ -11,7 +11,7 @@ public class ChuQuan extends NguoiDung
     //properties
     public double getTongDoanhThu() 
     { 
-        return this.dTongDoanhThu;
+        return dTongDoanhThu;
     }
     public void setTongDoanhThu(double tongDoanhThu) 
     {
@@ -19,7 +19,7 @@ public class ChuQuan extends NguoiDung
     }
     public List<Quan> getDsQuan() 
     {
-        return this.dsQuan;
+        return dsQuan;
     }
     public void setDsQuan(List<Quan> dsQuan) 
     {
@@ -29,6 +29,7 @@ public class ChuQuan extends NguoiDung
     public ChuQuan() 
     {
         this.dsQuan = new ArrayList<Quan>();
+        this.dTongDoanhThu = 0;
     }
     public ChuQuan(String ma, String ten, String sdt, String email) 
     {
@@ -36,13 +37,13 @@ public class ChuQuan extends NguoiDung
         this.dsQuan = new ArrayList<Quan>();
         this.dTongDoanhThu = 0;
     }
-    //ham them quan vao danh sach quan cua chu quan, dong thoi gan chu quan cho quan do
+    //hàm thêm quán vào danh sách quán của chủ quán, đồng thời gán chủ quán cho quán đó
     public void ThemQuan(Quan quan) 
     {
         this.dsQuan.add(quan);
-        quan.setChuCuaQuan(this);
+        quan.setChuCuaQuan(this); //gán chú quán cho quán vừa thêm
     }
-    //ham tim quan trong danh sach quan cua chu quan theo ma quan
+    //hàm tìm quán trong danh sách quán của chủ quán theo mã quán
     public Quan TimQuan(String ma) 
     {
         for (int i = 0; i < this.dsQuan.size(); i++) 
@@ -51,7 +52,7 @@ public class ChuQuan extends NguoiDung
             }
         return null;
     }
-    //ham hien thi danh sach quan cua chu quan
+    //hàm hiển thị danh sách quán của chủ quán
     public void HienThiDsQuan() 
     {
         System.out.println("Danh sach quan cua " + this.sTen + ":");
@@ -60,15 +61,16 @@ public class ChuQuan extends NguoiDung
             System.out.println("  " + this.dsQuan.get(i).getMa() + " - " + this.dsQuan.get(i).getTen() + " - " + this.dsQuan.get(i).getDiaChi());
         }
     }
-    //ham xuat
+    //hàm xuất
     @Override
     public void Xuat() 
     {
+        System.out.println("----Thong tin chu quan----");
         super.Xuat();
-        System.out.println("So quan so huu: " + this.dsQuan.size());
+        System.out.println("So quan chu so huu: " + this.dsQuan.size());
         System.out.println("Tong doanh thu: " + this.dTongDoanhThu + "d");
     }
-    // ham tinh toan so tien: cong doanh thu tu don hang cua quan minh
+    //hàm tính tóan số tiền: cộng doanh thu từ đơn hàng của quán mình
     @Override
     public void TinhToanTien(double soTien) {
         this.dTongDoanhThu = this.dTongDoanhThu + soTien;

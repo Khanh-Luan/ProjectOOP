@@ -13,7 +13,7 @@ public class MonAn
     //properties
     public String getMa() 
     {
-        return this.sMa;
+        return sMa;
     }
     public void setMa(String ma) 
     {
@@ -21,7 +21,7 @@ public class MonAn
     }
     public String getTen() 
     {
-        return this.sTen;
+        return sTen;
     }
     public void setTen(String ten) 
     {
@@ -29,7 +29,7 @@ public class MonAn
     }
     public double getGia() 
     {
-        return this.dGia;
+        return dGia;
     }
     public void setGia(double value) 
     {
@@ -63,6 +63,6 @@ public class MonAn
     //hàm xuất
     public void Xuat()
     {
-        System.out.println(this.sMa + " - " + this.sTen + " - " + this.dGia + " VND");
+        System.out.println("Mon an: "+this.sMa + " - " + this.sTen + " - " + this.dGia + " VND");
     }
 }

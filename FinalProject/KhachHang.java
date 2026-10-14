@@ -13,7 +13,7 @@ public class KhachHang extends NguoiDung
     //properties
     public String getDiaChiGiao() 
     {
-        return this.sDiaChiGiao;
+        return sDiaChiGiao;
     }
     public void setDiaChiGiao(String diaChiGiao) 
     {
@@ -21,7 +21,7 @@ public class KhachHang extends NguoiDung
     }
     public int getDiemTichLuyITFood() 
     {
-        return this.iDiemTichLuyITFood;
+        return iDiemTichLuyITFood;
     }
     public void setDiemTichLuyITFood(int diemTichLuyITFood) 
     {
@@ -29,7 +29,7 @@ public class KhachHang extends NguoiDung
     }
     public double getTongDaChi()
     { 
-        return this.dTongDaChi;
+        return dTongDaChi;
     }
     public void setTongDaChi(double tongDaChi) 
     {
@@ -38,7 +38,8 @@ public class KhachHang extends NguoiDung
     //constructor
     public KhachHang() 
     {
-
+        this.iDiemTichLuyITFood= 0;
+        this.dTongDaChi= 0;
     }
     public KhachHang(String ma, String ten, String sdt, String email, String diaChi) 
     {
@@ -52,7 +53,7 @@ public class KhachHang extends NguoiDung
     public void Nhap() throws IOException
     {
         super.Nhap();
-        System.out.println("KHACH HANG: ");
+        
         System.out.println("Nhap dia chi giao: ");
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
@@ -62,14 +63,16 @@ public class KhachHang extends NguoiDung
     @Override
     public void Xuat() 
     {
+        System.out.println("----Thong tin khach hang----");
         super.Xuat();
         System.out.println("Dia chi giao: " + this.sDiaChiGiao);
         System.out.println("Diem tich luy: " + this.iDiemTichLuyITFood);
-        System.out.println("Tong da chi: " + this.dTongDaChi + "d");
+        System.out.println("Tong da chi: " + this.dTongDaChi + "VND");
     }
-    // ham tinh toan so tien: cong don da chi va diem tich luy
+    // hàm tính tóan số tiền: cộng dồn đã chi và điểm tích lũy
     @Override
-    public void TinhToanTien(double soTien) {
+    public void TinhToanTien(double soTien) 
+    {
         this.dTongDaChi = this.dTongDaChi + soTien;
         this.iDiemTichLuyITFood = this.iDiemTichLuyITFood + (int)(soTien / 10000);
     }

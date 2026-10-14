@@ -15,7 +15,7 @@ abstract class NguoiDung
     //properties
     public String getMa() 
     {
-        return this.sMa;
+        return sMa;
     }
     public void setMa(String ma) 
     {
@@ -23,7 +23,7 @@ abstract class NguoiDung
     }
     public String getTen() 
     {
-        return this.sTen;
+        return sTen;
     }
     public void setTen(String ten) 
     {
@@ -31,7 +31,7 @@ abstract class NguoiDung
     }
     public String getSdt() 
     {
-        return this.sSdt;
+        return sSdt;
     }
     public void setSdt(String sdt) 
     {
@@ -39,14 +39,17 @@ abstract class NguoiDung
     }
     public String getEmail() 
     {
-        return this.sEmail;
+        return sEmail;
     }
     public void setEmail(String email) 
     {
         this.sEmail = email;
     }
     //constructor
-    public NguoiDung() { }
+    public NguoiDung() 
+    {
+
+    }
     public NguoiDung(String ma, String ten, String sdt, String email) 
     {
         this.sMa = ma;
@@ -54,7 +57,7 @@ abstract class NguoiDung
         this.sSdt = sdt;
         this.sEmail = email;
     }
-    //ham nhap
+    //hàm nhập
     public void Nhap() throws IOException 
     {
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -69,7 +72,7 @@ abstract class NguoiDung
         System.out.println("Nhap email: ");
         this.sEmail = br.readLine();
     }
-
+    //hàm xuất
     public void Xuat() 
     {
         System.out.println("Ma: " + this.sMa);
@@ -78,6 +81,6 @@ abstract class NguoiDung
         System.out.println("Email: " + this.sEmail);
     }
 
-    // moi loai nguoi dung tinh tien theo cach rieng cua minh
+    //mỗi lọai người dùng tính tiền theo cách riêng của mình
     public abstract void TinhToanTien(double soTien);
 }

@@ -128,6 +128,13 @@ public class DonHang
         this.dSoTienGiamGia = soTienGiamGia;
     }
     //constructor
+    public DonHang()
+    {
+        this.dsChiTiet= new ArrayList<ChiTietDon>();
+        this.trangThai= TrangThaiDon.ChoXacNhan;
+        this.dSoTienDaThanhToan= 0;
+        this.dSoTienGiamGia= 0;
+    }
     public DonHang(String ma, KhachHang khach, Quan quan) 
     {
         this.sMa = ma;
@@ -135,6 +142,8 @@ public class DonHang
         this.quan = quan;
         this.dsChiTiet= new ArrayList<ChiTietDon>();
         this.trangThai= TrangThaiDon.ChoXacNhan;
+        this.dSoTienDaThanhToan= 0;
+        this.dSoTienGiamGia= 0;
     }
     //hàm gọi món
     public void GoiMon(MonAn mon, int soLuong) 
@@ -145,7 +154,7 @@ public class DonHang
     //khách nhập thông tin đặt hàng: chọn món trong menu của quán, nhập khoảng cách giao (do là project nhỏ nên chưa xử lí được)
     public void Nhap() throws IOException
     {
-        quan.HienThiMenu();
+        this.quan.HienThiMenu();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         System.out.println("Nhap so mon muon dat: ");
@@ -292,6 +301,7 @@ public class DonHang
             System.out.println("Giam gia Voucher: -" + this.dSoTienGiamGia +"VND");
         }
         System.out.println("Phi ship: "+ TinhPhiShip()+ "VND");
+        System.out.println("Phi nen tang: "+ DonHang.Phi_nen_tang+ "VND");
         System.out.println("Tong thanh toan: "+ this.dSoTienDaThanhToan+ "VND");
         System.out.println("Trang thai: "+ this.trangThai);
     }
