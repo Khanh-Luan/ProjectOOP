@@ -64,5 +64,30 @@ namespace ITFood
             this.dTongDaChi = this.dTongDaChi + soTien;
             this.iDiemTichLuyITFood = this.iDiemTichLuyITFood + (int)(soTien / 10000);
         }
+
+        public PhuongThucThanhToan ChonPhuongThucThanhToan()
+        {
+            Console.WriteLine("Chon phuong thuc thanh toan:");
+            Console.WriteLine("1 - Tien mat");
+            Console.WriteLine("2 - Vi dien tu");
+            Console.WriteLine("3 - The");
+            Console.Write("Lua chon: ");
+
+            string chon = Console.ReadLine();
+
+            switch (chon)
+            {
+                case "2":
+                    ViDienTu vi = new ViDienTu();
+                    vi.Nhap();
+                    return vi;
+                case "3":
+                    The the = new The();
+                    the.Nhap();
+                    return the;
+                default:
+                    return new TienMat();
+            }
+        }
     }
 }

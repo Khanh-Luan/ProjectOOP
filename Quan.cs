@@ -166,5 +166,47 @@ namespace ITFood
             Console.WriteLine($"[Thong bao quan {this.sTen}] Nhan duoc don {don.Ma}, bat dau lam mon!!!");
             don.CapNhatTrangThai(TrangThaiDon.DangLam);
         }
+
+        public void NhapMenu()
+        {
+            Console.WriteLine("Nhap so mon trong menu: ");
+            int soMonMenu = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < soMonMenu; i++)
+            {
+                Console.WriteLine($"\n--- Nhap mon {i + 1} ---");
+                MonAn mon = new MonAn();
+                mon.Nhap();
+                this.ThemMon(mon);
+            }
+        }
+
+        public void NhapVoucher()
+        {
+            Console.WriteLine("Nhap so voucher cua quan: ");
+            int soVoucher = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < soVoucher; i++)
+            {
+                Console.WriteLine($"\n--- Nhap voucher {i + 1} ---");
+                Voucher v = new Voucher();
+                v.Nhap();
+                this.ThemVoucher(v);
+            }
+        }
+
+        public string ChonVoucher()
+        {
+            if (!this.CoVoucher())
+            {
+                Console.WriteLine("Quan nay hien khong co voucher khuyen mai.");
+                return null;
+            }
+
+            this.HienThiVoucherConDung();
+            Console.WriteLine("Nhap ma voucher muon dung (bo trong neu khong dung): ");
+            string maVoucher = Console.ReadLine();
+            return maVoucher;
+        }
     }
 }
